@@ -1,0 +1,406 @@
+export const serviceCategories = [
+  { id: 'all', name: 'All Services', icon: 'LayoutGrid' },
+  { id: 'print', name: 'Xerox & Printing', icon: 'Printer' },
+  { id: 'scan', name: 'Scanning & Digital Docs', icon: 'ScanLine' },
+  { id: 'jobs', name: 'Govt Jobs & Exams', icon: 'Briefcase' },
+  { id: 'gov', name: 'Govt Certificates & Schemes', icon: 'Landmark' },
+  { id: 'kyc', name: 'KYC & Identity Services', icon: 'ShieldCheck' },
+  { id: 'student', name: 'Student & Career Services', icon: 'GraduationCap' },
+  { id: 'online', name: 'General Online & Bills', icon: 'Globe' },
+  { id: 'finishing', name: 'Photos & Binding', icon: 'Camera' },
+];
+
+export const servicesData = [
+  // A. Xerox, printing & photocopy
+  {
+    id: 'xerox-bw',
+    title: 'Black & White Photocopy',
+    category: 'print',
+    categoryName: 'Xerox & Printing',
+    description: 'Crisp, high-speed double & single-sided xerox copies on standard 75 GSM paper.',
+    indicativePrice: '₹2 – ₹3',
+    unit: 'Per side / page',
+    turnaround: 'Instant (1–3 mins)',
+    popular: true,
+    requiredDocs: ['Original hardcopy document or book'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Suitable for legal papers, study notes, book chapters, government application copies, and general office documents. Discounts available on bulk sets (50+ pages).'
+  },
+  {
+    id: 'xerox-color',
+    title: 'Colour Photocopy & Xerox',
+    category: 'print',
+    categoryName: 'Xerox & Printing',
+    description: 'Vibrant color reproduction for certificates, marksheets, maps, and official documents.',
+    indicativePrice: '₹10 – ₹25',
+    unit: 'Per page (based on color coverage)',
+    turnaround: 'Instant (2–5 mins)',
+    popular: false,
+    requiredDocs: ['Original color document'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'High-definition laser color scanning and printing for marksheets, deeds, brochures, and colored graphs.'
+  },
+  {
+    id: 'print-phone-email',
+    title: 'Printouts from Phone, Email & WhatsApp',
+    category: 'print',
+    categoryName: 'Xerox & Printing',
+    description: 'Send files via WhatsApp or email and get sharp A4 laser printouts immediately.',
+    indicativePrice: '₹3 – ₹5 (B&W) / ₹10 – ₹25 (Color)',
+    unit: 'Per page',
+    turnaround: 'Instant (2–5 mins)',
+    popular: true,
+    requiredDocs: ['PDF, DOCX, or Image file on Phone/Email/USB'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Direct fast-print station. You can forward your document to our dedicated shop WhatsApp or email without connecting your phone to public PCs.'
+  },
+  {
+    id: 'bulk-pdf-print',
+    title: 'Multiple-Page PDF Book & Notes Printing',
+    category: 'print',
+    categoryName: 'Xerox & Printing',
+    description: 'Cost-effective printing for university syllabus, e-books, UPSC notes, and legal briefs.',
+    indicativePrice: '₹1.50 – ₹2.50',
+    unit: 'Per side for bulk orders (100+ pages)',
+    turnaround: '15–45 mins (Same day)',
+    popular: false,
+    requiredDocs: ['PDF document via Drive/Pendrive/Email'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Double-sided duplex printing with options for front transparent sheet and spiral binding.'
+  },
+
+  // B. Scanning & digital documents
+  {
+    id: 'doc-scan',
+    title: 'Document High-Res Scanning (PDF / JPG)',
+    category: 'scan',
+    categoryName: 'Scanning & Digital Docs',
+    description: 'Clear 300/600 DPI flatbed scanning of marksheets, certificates, and agreements.',
+    indicativePrice: '₹5 – ₹15',
+    unit: 'Per page or minimum job charge',
+    turnaround: 'Instant (2–5 mins)',
+    popular: true,
+    requiredDocs: ['Original documents/marksheets'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Export to searchable multi-page PDF or high-res JPEG, delivered straight to your WhatsApp or email.'
+  },
+  {
+    id: 'pdf-tools',
+    title: 'PDF Merge, Split, Compress & Convert',
+    category: 'scan',
+    categoryName: 'Scanning & Digital Docs',
+    description: 'Professional document preparation: merge multiple marksheets into a single portal-ready PDF.',
+    indicativePrice: '₹20 – ₹80',
+    unit: 'Per job depending on pages & complexity',
+    turnaround: '5–10 mins',
+    popular: false,
+    requiredDocs: ['Input PDF or scanned images'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Meets strict government portal size limits (e.g. under 200KB or 500KB) while preserving high readability.'
+  },
+  {
+    id: 'photo-sig-resize',
+    title: 'Photo & Signature Portal Specification Resize',
+    category: 'scan',
+    categoryName: 'Scanning & Digital Docs',
+    description: 'Crop and compress candidate photo & signature to exact portal requirements (e.g., 20KB-50KB, 200 DPI).',
+    indicativePrice: '₹20 – ₹50',
+    unit: 'Per photo/signature set',
+    turnaround: '5–10 mins',
+    popular: true,
+    requiredDocs: ['Passport photo / white paper signature specimen'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Guaranteed compliance with portal dimensions (width x height in px/cm) for SSC, UPSC, IBPS, and state exams.'
+  },
+  {
+    id: 'typing-formatting',
+    title: 'Hindi & English Document Typing & Formatting',
+    category: 'scan',
+    categoryName: 'Scanning & Digital Docs',
+    description: 'Affidavit drafting, rent agreements, application letters, and notices typed with precision.',
+    indicativePrice: '₹30 – ₹100+',
+    unit: 'Per page depending on language & format',
+    turnaround: '15–30 mins',
+    popular: false,
+    requiredDocs: ['Handwritten draft or oral points'],
+    officialFeeNote: 'Stamp duty / notary charges separate if applicable.',
+    details: 'Typed in standard Unicode Kruti Dev/Mangal (Hindi) or clean formal English layout with printout.'
+  },
+
+  // C. Government jobs & examination services
+  {
+    id: 'govt-job-forms',
+    title: 'SSC, UPSC, Railway & Banking Form Assistance',
+    category: 'jobs',
+    categoryName: 'Govt Jobs & Exams',
+    description: 'End-to-end assistance: registration, category details, qualification entry, photo upload & fee payment.',
+    indicativePrice: '₹70 – ₹200',
+    unit: 'Per application assistance fee',
+    turnaround: '15–30 mins',
+    popular: true,
+    requiredDocs: ['10th/12th/Graduation Marksheet', 'Aadhaar Card', 'Category/Caste Certificate (if applicable)', 'Passport Photo & Signature'],
+    officialFeeNote: 'Official exam application fee as prescribed by the recruiting commission is charged separately at actuals.',
+    details: 'Includes double-checking spelling, post preferences, examination center selection, and providing final submitted application PDF printouts.'
+  },
+  {
+    id: 'admit-card-print',
+    title: 'Admit Card & Hall Ticket Download & Print',
+    category: 'jobs',
+    categoryName: 'Govt Jobs & Exams',
+    description: 'Instant download using registration number and password, with clear instructions and exam guidelines print.',
+    indicativePrice: '₹10 – ₹25',
+    unit: 'Includes search + colored/B&W print',
+    turnaround: 'Instant (2–5 mins)',
+    popular: true,
+    requiredDocs: ['Application / Registration Number', 'Date of Birth / Portal Password'],
+    officialFeeNote: 'Free official portal download; charge is for retrieval & laser printout.',
+    details: 'Includes printout of mandatory declaration, COVID guidelines, and candidate instruction sheets.'
+  },
+  {
+    id: 'exam-results',
+    title: 'Exam Result & Scorecard Verification & Print',
+    category: 'jobs',
+    categoryName: 'Govt Jobs & Exams',
+    description: 'Server status check during peak traffic hours, scorecard download, rank list lookup and color print.',
+    indicativePrice: '₹15 – ₹30',
+    unit: 'Per result lookup & print',
+    turnaround: 'Instant (3–5 mins)',
+    popular: false,
+    requiredDocs: ['Roll Number / Registration Number', 'Exam Hall Ticket'],
+    officialFeeNote: 'Free official portal verification.',
+    details: 'High-speed fiber connectivity ensures fast portal access even when official servers face heavy server load.'
+  },
+
+  // D. Government and public-service applications
+  {
+    id: 'cert-income-caste',
+    title: 'Income, Caste & Domicile Certificate Guidance',
+    category: 'gov',
+    categoryName: 'Govt Certificates & Schemes',
+    description: 'Assisted application on state citizen service portals (e-District / RTPS / Seva Sindhu / edistrict).',
+    indicativePrice: '₹50 – ₹150',
+    unit: 'Shop assistance fee per certificate',
+    turnaround: '20–30 mins form entry',
+    popular: true,
+    requiredDocs: ['Aadhaar Card', 'Ration Card / Electricity Bill', 'Self-declaration affidavit', 'Previous certificate copies'],
+    officialFeeNote: 'State government citizen portal statutory fee (usually ₹15–₹50) paid directly with official receipt.',
+    details: 'We guide you through the correct document uploads and tracking acknowledgement receipt to check approval status.'
+  },
+  {
+    id: 'ration-voter-card',
+    title: 'Voter ID & Ration Card Online Portal Assistance',
+    category: 'gov',
+    categoryName: 'Govt Certificates & Schemes',
+    description: 'New Voter ID (Form 6), address change (Form 8), and Ration card member addition guidance.',
+    indicativePrice: '₹50 – ₹120',
+    unit: 'Per application assistance',
+    turnaround: '15–20 mins',
+    popular: false,
+    requiredDocs: ['Aadhaar Card', 'Age proof', 'Current Residence proof', 'Passport Photo'],
+    officialFeeNote: 'Voter portal services are officially free from ECI. Assistance fee is for operator guidance.',
+    details: 'Assistance for online application on the official Election Commission of India (ECI) / State Food Department portal.'
+  },
+  {
+    id: 'passport-app',
+    title: 'Passport Online Application & Slot Appointment',
+    category: 'gov',
+    categoryName: 'Govt Certificates & Schemes',
+    description: 'Assisted registration on Passport Seva portal, document selection checklist, and PSK slot booking.',
+    indicativePrice: '₹150 – ₹300',
+    unit: 'Shop assistance fee',
+    turnaround: '25–40 mins',
+    popular: false,
+    requiredDocs: ['Aadhaar Card', '10th Marksheet / Birth Certificate', 'PAN Card', 'Bank Passbook'],
+    officialFeeNote: 'Official passport fee (₹1,500 for normal 36 pages) paid directly to Ministry of External Affairs portal.',
+    details: 'Complete guidance on document verification rules at the Passport Seva Kendra (PSK) and appointment rescheduling assistance.'
+  },
+  {
+    id: 'driving-licence',
+    title: 'Driving Licence & Learner Licence Portal Help',
+    category: 'gov',
+    categoryName: 'Govt Certificates & Schemes',
+    description: 'Online application on Sarathi Parivahan portal for Learner Licence (LL) test slot, renewal, and address change.',
+    indicativePrice: '₹80 – ₹200',
+    unit: 'Shop assistance fee',
+    turnaround: '15–25 mins',
+    popular: false,
+    requiredDocs: ['Aadhaar Card with mobile linked', 'Age proof', 'Address proof', 'Medical Certificate Form 1A if required'],
+    officialFeeNote: 'State RTO Parivahan test/licence fees paid directly to the Parivahan portal with official receipt.',
+    details: 'Includes mock test guidelines, fee receipt generation, and slot booking for online learner exam.'
+  },
+
+  // E. KYC and identity-related assistance
+  {
+    id: 'pan-card-assist',
+    title: 'PAN Card Application & Correction Assistance',
+    category: 'kyc',
+    categoryName: 'Govt Certificates & Schemes',
+    description: 'Assistance with new PAN application (Form 49A) or corrections in name, father’s name & DOB.',
+    indicativePrice: '₹60 – ₹150',
+    unit: 'Shop assistance fee',
+    turnaround: '15–20 mins',
+    popular: true,
+    requiredDocs: ['Aadhaar Card (with active phone for OTP)', 'Proof of Date of Birth', 'Passport Photo & Signature'],
+    officialFeeNote: 'Official NSDL / UTIITSL statutory fee (~₹107 for physical card) paid separately with government acknowledgement.',
+    details: 'Track your PAN delivery status online; assistance with both paperless e-KYC mode and physical document dispatch.'
+  },
+  {
+    id: 'kyc-upload-help',
+    title: 'Customer KYC & Bank Account Upload Assistance',
+    category: 'kyc',
+    categoryName: 'Govt Certificates & Schemes',
+    description: 'Assisting customers in uploading verified KYC docs to authorized banking, insurance, or telecom portals.',
+    indicativePrice: '₹30 – ₹100',
+    unit: 'Per assisted task',
+    turnaround: '10–15 mins',
+    popular: false,
+    requiredDocs: ['Aadhaar Card', 'PAN Card', 'Bank Passbook / Cheque', 'Registered Mobile for OTP'],
+    officialFeeNote: 'No official charges on customer verification portals.',
+    details: 'Customer enters OTP directly on the screen. We do not store or ask for sensitive passwords or pins.'
+  },
+
+  // F. Education, student & career services
+  {
+    id: 'college-admission',
+    title: 'College & University Online Admission Forms',
+    category: 'student',
+    categoryName: 'Student & Career Services',
+    description: 'Form submission for undergraduate, postgraduate, ITI, Polytechnic, and vocational college portals.',
+    indicativePrice: '₹50 – ₹150',
+    unit: 'Per application assistance fee',
+    turnaround: '15–30 mins',
+    popular: true,
+    requiredDocs: ['10th/12th Marksheet', 'School Leaving Certificate (TC)', 'Caste/Income Certificate if applicable', 'Photo & Signature'],
+    officialFeeNote: 'College prospectus & application fee paid directly to the university account.',
+    details: 'Verification of subject cutoffs, document uploads, choice locking, and registration slip printout.'
+  },
+  {
+    id: 'scholarship-apply',
+    title: 'National & State Scholarship Applications (NSP)',
+    category: 'student',
+    categoryName: 'Student & Career Services',
+    description: 'End-to-end guidance for National Scholarship Portal (NSP), Pre-Matric, Post-Matric & Merit scholarships.',
+    indicativePrice: '₹60 – ₹150',
+    unit: 'Shop assistance fee',
+    turnaround: '20–35 mins',
+    popular: true,
+    requiredDocs: ['Aadhaar Card linked to Bank Account', 'Income Certificate', 'Caste Certificate', 'Previous Year Marksheet', 'Fee Receipt & Bonafide'],
+    officialFeeNote: 'Scholarship portals do not charge application fees.',
+    details: 'Critical verification of bank account seeding (Aadhaar seeding), bonafide student certificates, and final submission printout.'
+  },
+  {
+    id: 'resume-biodata',
+    title: 'Professional Resume & Biodata Creation',
+    category: 'student',
+    categoryName: 'Student & Career Services',
+    description: 'Modern single & multi-page CVs, fresher resumes, and marriage biodatas formatted in clean professional styles.',
+    indicativePrice: '₹100 – ₹300',
+    unit: 'Per document design + 2 color prints',
+    turnaround: '20–45 mins',
+    popular: true,
+    requiredDocs: ['Education details', 'Work history / Skills', 'Personal details'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Delivered in high-quality PDF format, Word document for future edits, and 2 premium bond paper printouts.'
+  },
+
+  // G. General online services
+  {
+    id: 'internet-access',
+    title: 'High-Speed Internet Surfing & Email Terminal',
+    category: 'online',
+    categoryName: 'General Online & Bills',
+    description: 'Clean, virus-free desktop PC stations with high-speed fiber internet for urgent browsing and downloads.',
+    indicativePrice: '₹20 – ₹30',
+    unit: 'Per hour',
+    turnaround: 'Walk-in access',
+    popular: false,
+    requiredDocs: ['Valid government photo ID for user register entry'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'High-speed fiber connection, safe browsing environment. Strictly non-gaming, assisted work only.'
+  },
+  {
+    id: 'utility-bills',
+    title: 'Electricity, Water & Gas Bill Payment Assistance',
+    category: 'online',
+    categoryName: 'General Online & Bills',
+    description: 'Authorized online payment of monthly electricity, municipal water, and piped gas bills with printed receipt.',
+    indicativePrice: '₹10 – ₹30',
+    unit: 'Shop convenience fee per bill',
+    turnaround: 'Instant (2–4 mins)',
+    popular: false,
+    requiredDocs: ['Consumer Number / Account ID / Old Bill'],
+    officialFeeNote: 'Exact bill amount credited directly to utility board with official transaction ID receipt.',
+    details: 'Instant payment confirmation via BBPS / authorized utility gateway with printed transaction receipt.'
+  },
+  {
+    id: 'ticket-booking',
+    title: 'Train, Bus & Air Ticket Booking Assistance',
+    category: 'online',
+    categoryName: 'General Online & Bills',
+    description: 'Travel ticket reservation guidance on authorized partner portals with confirmed PNR printouts.',
+    indicativePrice: '₹30 – ₹100',
+    unit: 'Assistance fee per booking',
+    turnaround: '10–20 mins',
+    popular: false,
+    requiredDocs: ['Passenger names, age, and valid ID copies', 'Preferred dates & destinations'],
+    officialFeeNote: 'Railway / Airline / Bus operator fare collected at actuals per booking summary.',
+    details: 'Assistance with seat selection, Tatkal timings advice, cancellation assistance, and physical ticket printing.'
+  },
+
+  // H. Photo & document finishing
+  {
+    id: 'passport-photos',
+    title: 'Instant Passport-Size Photos (Set of 8 / 16 / 32)',
+    category: 'finishing',
+    categoryName: 'Photos & Binding',
+    description: 'Studio lighting, clean white/blue background, sharp photo-paper prints ready in 5 minutes.',
+    indicativePrice: '₹40 – ₹80',
+    unit: 'Set of 8 / 16 prints',
+    turnaround: 'Instant (5 mins)',
+    popular: true,
+    requiredDocs: ['Walk-in portrait capture or photo from phone'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Cut to standard 3.5cm x 4.5cm dimensions on high-gloss 230 GSM photo paper. Soft copy sent to your WhatsApp free.'
+  },
+  {
+    id: 'lamination-binding',
+    title: 'Thermal Lamination & Heavy Spiral Binding',
+    category: 'finishing',
+    categoryName: 'Photos & Binding',
+    description: 'Long-lasting 125/250 micron lamination for certificates and spiral binding for college projects.',
+    indicativePrice: '₹20 – ₹60',
+    unit: 'Per document / book',
+    turnaround: 'Instant (5–10 mins)',
+    popular: true,
+    requiredDocs: ['Document or sheets to laminate / bind'],
+    officialFeeNote: 'No government fee applicable.',
+    details: 'Protect your valuable marksheets from moisture, creases, and tears. Heavy-duty plastic coils and transparent covers.'
+  }
+];
+
+export const trustHighlights = [
+  { icon: 'ShieldCheck', title: '100% Privacy & OTP Safety', desc: 'Customers enter their own OTPs. Zero passwords retained.' },
+  { icon: 'Coins', title: 'Transparent Indicative Rates', desc: 'Shop service charges and official govt fees clearly separated.' },
+  { icon: 'Zap', title: 'Fast Counter Turnaround', desc: 'High-speed dual laser printers and high-res flatbed scanners.' },
+  { icon: 'CheckCircle2', title: 'Portal Compliance Assured', desc: 'Photo sizes, signature formats & documents checked before submit.' }
+];
+
+// Demo text for person and contact information as requested
+export const shopInfo = {
+  name: 'Digital Seva & Cyber Service Centre',
+  tagline: 'Your Trusted Digital & Documentation Service Centre',
+  headline: 'All Your Online & Document Work, Made Simple.',
+  subheadline: 'From government job forms and KYC assistance to Xerox, printing, scanning and online applications, get reliable help with everyday digital work — all at one nearby centre.',
+  contactPerson: 'Demo Coordinator: Rajesh Sharma (Operator In-Charge)',
+  phone: '+91 98000 00000',
+  phoneDisplay: '+91 98000 00000',
+  whatsappNumber: '919800000000',
+  whatsappDisplay: '+91 98000 00000',
+  email: 'demo.operator@example.com',
+  address: 'Shop No. 12, Ground Floor, Demo Main Market Road, Near City Head Post Office',
+  city: 'Demo City, State - 110001',
+  landmark: 'Opposite Demo Gate No. 2, Near District Tehsil Complex',
+  timings: 'Monday – Saturday: 8:30 AM – 8:30 PM | Sunday: 9:00 AM – 2:00 PM',
+  status: 'Open Today till 8:30 PM',
+  experience: '8+ Years Serving Local Citizens & Students'
+};
