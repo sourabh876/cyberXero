@@ -2,98 +2,119 @@ import React from 'react';
 import { 
   ShieldCheck, 
   Clock, 
-  MapPin, 
   Cpu, 
-  CheckCircle2, 
   Coins, 
   Printer, 
-  HeartHandshake 
+  HeartHandshake,
+  Sparkles
 } from 'lucide-react';
 import { shopInfo } from '../../data/servicesData';
 
 export default function WhyChooseUs() {
   const reasons = [
     {
-      title: 'Customer-Controlled OTP Security',
-      desc: 'We never ask you to disclose OTPs, PINs, or banking passwords. You type them directly into the secure portal window.',
+      title: 'Customer-Controlled OTPs',
+      desc: 'You enter OTPs and PINs yourself. We never ask for or store confidential credentials.',
+      tag: 'Zero Data Stored',
       icon: ShieldCheck,
-      color: 'text-brand-emerald-600',
-      bg: 'bg-brand-emerald-50'
+      gradient: 'from-emerald-500 to-teal-600',
+      tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-100'
     },
     {
-      title: 'Trained & Patient Operators',
-      desc: 'No rushing. We double check spelling of father’s name, candidate DOB, category quotas, and portal guidelines before payment.',
+      title: 'Patient & Trained Staff',
+      desc: 'Careful double-check of candidate name, DOB, and category quotas before payment.',
+      tag: 'Error-Free Filing',
       icon: HeartHandshake,
-      color: 'text-brand-blue-700',
-      bg: 'bg-brand-blue-50'
+      gradient: 'from-indigo-500 to-blue-600',
+      tagColor: 'bg-indigo-50 text-brand-blue-700 border-indigo-100'
     },
     {
-      title: 'Exact Portal File Specifications',
-      desc: 'Guaranteed sizing for photos (20KB–50KB) and certificates (under 200KB) so your application is never rejected.',
+      title: 'Exact Portal Sizing',
+      desc: 'Guaranteed 20KB–50KB and 200 DPI compliance — zero photo or signature rejections.',
+      tag: '100% Compliant',
       icon: Cpu,
-      color: 'text-brand-saffron-600',
-      bg: 'bg-brand-saffron-50'
+      gradient: 'from-amber-500 to-orange-600',
+      tagColor: 'bg-amber-50 text-amber-800 border-amber-100'
     },
     {
-      title: 'Dual Laser Printers with Power Backup',
-      desc: 'Heavy-duty commercial laser printers and inverter backup ensure zero delays during power cuts or exam deadline rush.',
+      title: 'Dual Lasers + Power Backup',
+      desc: 'Heavy-duty dual printers and inverter backup ensure zero delays during peak rush.',
+      tag: 'Zero Downtime',
       icon: Printer,
-      color: 'text-brand-blue-700',
-      bg: 'bg-brand-blue-50'
+      gradient: 'from-purple-500 to-indigo-600',
+      tagColor: 'bg-purple-50 text-purple-700 border-purple-100'
     },
     {
       title: '100% Itemized Receipts',
-      desc: 'Transparent itemized bills separating shop service fees from official government pass-through fees with portal receipts.',
+      desc: 'Transparent billing separating shop assistance fees from official government pass-through fees.',
+      tag: 'Clear Accounting',
       icon: Coins,
-      color: 'text-brand-emerald-600',
-      bg: 'bg-brand-emerald-50'
+      gradient: 'from-teal-500 to-cyan-600',
+      tagColor: 'bg-teal-50 text-teal-700 border-teal-100'
     },
     {
-      title: 'Prime Location & Long Hours',
-      desc: 'Centrally located near Tehsil Complex and Head Post Office. Open 8:30 AM to 8:30 PM for before-and-after work visits.',
+      title: 'Prime Location & 12h Open',
+      desc: 'Centrally located near Tehsil Complex. Open 8:30 AM to 8:30 PM for convenient visits.',
+      tag: '8:30 AM – 8:30 PM',
       icon: Clock,
-      color: 'text-brand-saffron-600',
-      bg: 'bg-brand-saffron-50'
+      gradient: 'from-rose-500 to-pink-600',
+      tagColor: 'bg-rose-50 text-rose-700 border-rose-100'
     }
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-white border-b border-slate-200/80">
+    <section className="py-16 lg:py-24 bg-slate-50/70 border-b border-slate-200/70 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue-50 border border-brand-blue-200 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
-            <span>Commitment to Quality</span>
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-brand-blue-500" />
+            <span>Why Citizens Choose Us</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-blue-950 tracking-tight">
-            Why Hundreds of Citizens Choose Us Daily
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Built for Privacy, Speed & Precision
           </h2>
-          <p className="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed">
-            Designed from the ground up for convenience, document confidentiality, and technical accuracy.
+          <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
+            Every workflow is designed to save you time and protect your personal information.
           </p>
         </div>
 
-        {/* Grid of 6 Key Value Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Enhanced 6 Vibrant Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reasons.map((r, idx) => {
             const Icon = r.icon;
             return (
               <div 
                 key={idx}
-                className="p-6 rounded-3xl bg-slate-50/70 border border-slate-200/80 hover:border-brand-blue-300 hover:bg-white hover:shadow-card-hover transition-all duration-300 group"
+                className="p-6 rounded-3xl bg-white border border-slate-200/70 hover:border-indigo-300 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 overflow-hidden relative"
               >
-                <div className={`w-12 h-12 rounded-2xl ${r.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
-                  <Icon className={`w-6 h-6 ${r.color}`} />
+                {/* Top subtle gradient line */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${r.gradient}`} />
+
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${r.gradient} text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${r.tagColor}`}>
+                      {r.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-extrabold text-slate-900 mb-2 group-hover:text-brand-blue-600 transition-colors">
+                    {r.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    {r.desc}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-bold text-brand-blue-950 mb-2 group-hover:text-brand-blue-700 transition-colors">
-                  {r.title}
-                </h3>
-
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  {r.desc}
-                </p>
+                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-slate-400 group-hover:text-slate-600 transition-colors">
+                  <span>Guaranteed at our counter</span>
+                </div>
               </div>
             );
           })}

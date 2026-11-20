@@ -6,10 +6,18 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #fafbfd;
+    color: #1e293b;
+    overflow-x: hidden;
   }
 }
 
-/* Custom modern scrollbars */
+/* Custom modern smooth scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -19,10 +27,46 @@
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 4px;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Glassmorphism & Surface Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(241, 245, 249, 0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -5px rgba(99, 102, 241, 0.14), 0 8px 16px -4px rgba(99, 102, 241, 0.06);
+  border-color: rgba(165, 180, 252, 0.6);
+}
+
+/* Smooth gradient accents */
+.gradient-text-vibrant {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #3730a3 0%, #4f46e5 60%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* 3D floating and perspective styles */
@@ -51,14 +95,14 @@
   }
 }
 
-@keyframes pulse-subtle {
+@keyframes pulse-glow {
   0%, 100% {
-    opacity: 1;
+    opacity: 0.6;
     transform: scale(1);
   }
   50% {
-    opacity: 0.92;
-    transform: scale(1.02);
+    opacity: 0.9;
+    transform: scale(1.04);
   }
 }
 
@@ -70,6 +114,6 @@
   animation: float-reverse 6s ease-in-out infinite;
 }
 
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s ease-in-out infinite;
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
 }
