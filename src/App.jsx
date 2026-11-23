@@ -44,7 +44,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans selection:bg-brand-saffron-500 selection:text-white">
+    <div className="min-h-screen bg-[#fafbfd] text-slate-800 flex flex-col font-sans selection:bg-brand-blue-500 selection:text-white">
       {/* Navigation Header */}
       <Navbar activeView={activeView} setActiveView={setActiveView} />
 
@@ -101,11 +101,11 @@ export default function App() {
           href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre%2C%20I%20have%20an%20enquiry.`}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-2.5 px-4 py-3 rounded-full bg-brand-emerald-500 hover:bg-brand-emerald-600 text-white font-bold text-xs shadow-xl hover:shadow-glow-emerald transition-all transform hover:scale-105"
+          className="group flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs shadow-xl shadow-emerald-500/30 hover:shadow-glow-emerald transition-all transform hover:scale-105"
           aria-label="Direct WhatsApp Message (Demo)"
         >
-          <MessageSquare className="w-5 h-5 fill-white text-brand-emerald-500" />
-          <span className="hidden sm:inline font-bold">WhatsApp (Demo)</span>
+          <MessageSquare className="w-5 h-5 fill-white text-emerald-500" />
+          <span className="hidden sm:inline font-bold">WhatsApp Direct</span>
         </a>
       </div>
     </div>

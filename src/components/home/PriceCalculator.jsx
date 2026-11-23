@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Calculator, Plus, Minus, RotateCcw, AlertCircle, CheckCircle2, MessageSquare } from 'lucide-react';
+import { 
+  Calculator, 
+  RotateCcw, 
+  MessageSquare, 
+  Sparkles,
+  Printer,
+  ScanLine,
+  Briefcase,
+  Layers,
+  Camera
+} from 'lucide-react';
 import { shopInfo } from '../../data/servicesData';
 
 export default function PriceCalculator() {
@@ -10,13 +20,13 @@ export default function PriceCalculator() {
   const [laminationCount, setLaminationCount] = useState(0);
   const [passportPhotoSet, setPassportPhotoSet] = useState(0);
 
-  // Unit rate assumptions
-  const RATE_BW = 2; // ₹2/page
-  const RATE_COLOR = 10; // ₹10/page
-  const RATE_SCAN = 5; // ₹5/page
-  const RATE_FORM = 100; // ₹100 assistance
-  const RATE_LAMINATION = 30; // ₹30/doc
-  const RATE_PHOTO = 50; // ₹50/set of 8
+  // Unit rates
+  const RATE_BW = 2;
+  const RATE_COLOR = 10;
+  const RATE_SCAN = 5;
+  const RATE_FORM = 100;
+  const RATE_LAMINATION = 30;
+  const RATE_PHOTO = 50;
 
   const totalShopEstimate = 
     (bwPages * RATE_BW) +
@@ -35,80 +45,136 @@ export default function PriceCalculator() {
     setPassportPhotoSet(0);
   };
 
+  const applyPreset = (preset) => {
+    if (preset === 'admit') {
+      setBwPages(2);
+      setColorPages(1);
+      setScanPages(0);
+      setFormsCount(0);
+      setLaminationCount(1);
+      setPassportPhotoSet(0);
+    } else if (preset === 'job') {
+      setBwPages(4);
+      setColorPages(0);
+      setScanPages(2);
+      setFormsCount(1);
+      setLaminationCount(0);
+      setPassportPhotoSet(1);
+    } else if (preset === 'notes') {
+      setBwPages(40);
+      setColorPages(0);
+      setScanPages(0);
+      setFormsCount(0);
+      setLaminationCount(0);
+      setPassportPhotoSet(0);
+    }
+  };
+
   const whatsappMessage = encodeURIComponent(
-    `Hello Digital Seva Centre, I used your website price calculator for: ${bwPages} B&W prints, ${colorPages} Color prints, ${scanPages} Scans, ${formsCount} Online forms, ${laminationCount} Laminations, ${passportPhotoSet} Photo sets. Estimated shop charge: ₹${totalShopEstimate}. Can I get this done today?`
+    `Hello Digital Seva Centre, I used your website price estimator for: ${bwPages} B&W prints, ${colorPages} Color prints, ${scanPages} Scans, ${formsCount} Online forms, ${laminationCount} Laminations, ${passportPhotoSet} Photo sets. Estimated total: ₹${totalShopEstimate}. Can I get this done today?`
   );
 
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+    <div className="bg-white/95 rounded-3xl p-6 sm:p-8 border border-slate-200/70 shadow-sm hover:shadow-lg transition-all duration-300">
       
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 mb-6 gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-brand-saffron-50 border border-brand-saffron-200 flex items-center justify-center text-brand-saffron-600">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-saffron-500 to-amber-400 flex items-center justify-center text-white shadow-md shadow-brand-saffron-500/30">
             <Calculator className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-extrabold text-brand-blue-950 text-base sm:text-lg">
-              Instant Service Cost Estimator
+            <h3 className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight">
+              Estimate Cost in Seconds
             </h3>
-            <p className="text-xs text-slate-500">Calculate your counter bill based on typical requirements</p>
+            <p className="text-xs text-slate-500">Pick your pages, scans, and forms for an instant total</p>
           </div>
         </div>
 
-        <button
-          onClick={resetAll}
-          className="text-xs text-slate-400 hover:text-slate-600 flex items-center gap-1 transition"
-          title="Reset"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Reset</span>
-        </button>
+        {/* Quick Presets & Reset */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider hidden md:inline">Quick Presets:</span>
+          <button
+            onClick={() => applyPreset('admit')}
+            className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-indigo-50 text-brand-blue-700 hover:bg-indigo-100 transition border border-indigo-100"
+          >
+            Admit Card Set
+          </button>
+          <button
+            onClick={() => applyPreset('job')}
+            className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 transition border border-purple-100"
+          >
+            Job Form + Docs
+          </button>
+          <button
+            onClick={() => applyPreset('notes')}
+            className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 hover:bg-amber-100 transition border border-amber-100"
+          >
+            Bulk Xerox
+          </button>
+          <button
+            onClick={resetAll}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition ml-1"
+            title="Reset All"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
-      {/* Inputs Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* Stepper Grid with Vibrant Item Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         
-        {/* Item 1: B&W Xerox / Print */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-800 block">B&W Xerox / Print</span>
-            <span className="text-[11px] text-slate-500">₹2 per page</span>
+        {/* Item 1: B&W Xerox */}
+        <div className="p-4 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-between hover:bg-indigo-50 transition">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-indigo-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <Printer className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">B&W Xerox / Print</span>
+              <span className="text-[11px] text-indigo-700 font-semibold">₹2 / page</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-indigo-200/80 shadow-xs">
             <button
               onClick={() => setBwPages(Math.max(0, bwPages - 5))}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               -
             </button>
-            <span className="w-8 text-center text-xs font-bold font-mono">{bwPages}</span>
+            <span className="w-8 text-center text-xs font-black font-mono text-slate-800">{bwPages}</span>
             <button
               onClick={() => setBwPages(bwPages + 5)}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               +
             </button>
           </div>
         </div>
 
-        {/* Item 2: Color Laser Print */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-800 block">Color Print</span>
-            <span className="text-[11px] text-slate-500">₹10 per page</span>
+        {/* Item 2: Color Print */}
+        <div className="p-4 rounded-2xl bg-orange-50/50 border border-orange-100 flex items-center justify-between hover:bg-orange-50 transition">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-brand-saffron-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <Printer className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">Color Print</span>
+              <span className="text-[11px] text-amber-700 font-semibold">₹10 / page</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-orange-200/80 shadow-xs">
             <button
               onClick={() => setColorPages(Math.max(0, colorPages - 1))}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               -
             </button>
-            <span className="w-8 text-center text-xs font-bold font-mono">{colorPages}</span>
+            <span className="w-8 text-center text-xs font-black font-mono text-slate-800">{colorPages}</span>
             <button
               onClick={() => setColorPages(colorPages + 1)}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               +
             </button>
@@ -116,45 +182,55 @@ export default function PriceCalculator() {
         </div>
 
         {/* Item 3: Document Scanning */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-800 block">Document Scanning</span>
-            <span className="text-[11px] text-slate-500">₹5 per page (PDF)</span>
+        <div className="p-4 rounded-2xl bg-cyan-50/50 border border-cyan-100 flex items-center justify-between hover:bg-cyan-50 transition">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-cyan-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <ScanLine className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">Doc Scan (PDF)</span>
+              <span className="text-[11px] text-cyan-700 font-semibold">₹5 / page</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-cyan-200/80 shadow-xs">
             <button
               onClick={() => setScanPages(Math.max(0, scanPages - 1))}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               -
             </button>
-            <span className="w-8 text-center text-xs font-bold font-mono">{scanPages}</span>
+            <span className="w-8 text-center text-xs font-black font-mono text-slate-800">{scanPages}</span>
             <button
               onClick={() => setScanPages(scanPages + 1)}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               +
             </button>
           </div>
         </div>
 
-        {/* Item 4: Online Form Assistance */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-800 block">Govt / Exam Forms</span>
-            <span className="text-[11px] text-slate-500">₹100 assistance</span>
+        {/* Item 4: Online Form Filing */}
+        <div className="p-4 rounded-2xl bg-purple-50/50 border border-purple-100 flex items-center justify-between hover:bg-purple-50 transition">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-purple-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <Briefcase className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">Govt Job Form</span>
+              <span className="text-[11px] text-purple-700 font-semibold">₹100 / form</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-purple-200/80 shadow-xs">
             <button
               onClick={() => setFormsCount(Math.max(0, formsCount - 1))}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               -
             </button>
-            <span className="w-8 text-center text-xs font-bold font-mono">{formsCount}</span>
+            <span className="w-8 text-center text-xs font-black font-mono text-slate-800">{formsCount}</span>
             <button
               onClick={() => setFormsCount(formsCount + 1)}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               +
             </button>
@@ -162,22 +238,27 @@ export default function PriceCalculator() {
         </div>
 
         {/* Item 5: Thermal Lamination */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-800 block">Certificate Lamination</span>
-            <span className="text-[11px] text-slate-500">₹30 per document</span>
+        <div className="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100 flex items-center justify-between hover:bg-emerald-50 transition">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <Layers className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">Lamination</span>
+              <span className="text-[11px] text-emerald-700 font-semibold">₹30 / doc</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-emerald-200/80 shadow-xs">
             <button
               onClick={() => setLaminationCount(Math.max(0, laminationCount - 1))}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               -
             </button>
-            <span className="w-8 text-center text-xs font-bold font-mono">{laminationCount}</span>
+            <span className="w-8 text-center text-xs font-black font-mono text-slate-800">{laminationCount}</span>
             <button
               onClick={() => setLaminationCount(laminationCount + 1)}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               +
             </button>
@@ -185,22 +266,27 @@ export default function PriceCalculator() {
         </div>
 
         {/* Item 6: Passport Photo Set */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-800 block">Passport Photo Set</span>
-            <span className="text-[11px] text-slate-500">₹50 (8 photos + softcopy)</span>
+        <div className="p-4 rounded-2xl bg-rose-50/50 border border-rose-100 flex items-center justify-between hover:bg-rose-50 transition">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-rose-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <Camera className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">Photo Pack (8 pcs)</span>
+              <span className="text-[11px] text-rose-700 font-semibold">₹50 / pack</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-rose-200/80 shadow-xs">
             <button
               onClick={() => setPassportPhotoSet(Math.max(0, passportPhotoSet - 1))}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               -
             </button>
-            <span className="w-8 text-center text-xs font-bold font-mono">{passportPhotoSet}</span>
+            <span className="w-8 text-center text-xs font-black font-mono text-slate-800">{passportPhotoSet}</span>
             <button
               onClick={() => setPassportPhotoSet(passportPhotoSet + 1)}
-              className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold"
+              className="w-6 h-6 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold text-sm flex items-center justify-center transition"
             >
               +
             </button>
@@ -209,17 +295,17 @@ export default function PriceCalculator() {
 
       </div>
 
-      {/* Total Banner */}
-      <div className="mt-6 p-5 rounded-2xl bg-gradient-to-r from-brand-blue-900 to-brand-blue-950 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Vibrant Total Estimate Banner */}
+      <div className="mt-6 p-6 rounded-2xl bg-gradient-to-r from-brand-blue-700 via-indigo-600 to-brand-purple-600 text-white flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl shadow-indigo-500/20">
         <div>
-          <span className="text-xs text-brand-saffron-300 font-medium block">
-            Estimated Counter Service Fee:
+          <span className="text-xs font-bold text-indigo-100 uppercase tracking-wider block">
+            Estimated Counter Assistance Charge:
           </span>
-          <div className="text-3xl font-extrabold font-mono text-white">
+          <div className="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight mt-0.5">
             ₹{totalShopEstimate}
           </div>
-          <p className="text-[11px] text-slate-300 mt-0.5">
-            *Indicative estimate. Official exam portal fees and statutory duties are billed separately at actuals.
+          <p className="text-[11px] text-indigo-200/90 mt-1">
+            *Indicative estimate. Official exam fees or statutory taxes are billed separately at actuals.
           </p>
         </div>
 
@@ -227,9 +313,9 @@ export default function PriceCalculator() {
           href={`https://wa.me/${shopInfo.whatsappNumber}?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-5 py-2.5 rounded-xl bg-brand-emerald-500 hover:bg-brand-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-md shrink-0"
+          className="px-6 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-brand-blue-700 hover:text-brand-blue-800 font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-md shrink-0 transform hover:scale-105"
         >
-          <MessageSquare className="w-4 h-4 fill-white" />
+          <MessageSquare className="w-4 h-4 text-emerald-500" />
           <span>Confirm Quote on WhatsApp</span>
         </a>
       </div>

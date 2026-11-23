@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
+  FileText,
   Phone,
   MessageSquare,
   Menu,
@@ -8,7 +8,8 @@ import {
   MapPin,
   Clock,
   BarChart3,
-  ChevronRight
+  ChevronRight,
+  Sparkles
 } from 'lucide-react';
 
 import { shopInfo } from '../../data/servicesData';
@@ -17,20 +18,27 @@ export default function Navbar({ activeView, setActiveView }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const topBarRef = useRef(null);
 
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'Services', href: '#services', id: 'services' },
     { name: 'How It Works', href: '#how-it-works', id: 'how-it-works' },
     { name: 'Pricing', href: '#pricing', id: 'pricing' },
-    { name: 'About Us', href: '#about', id: 'about' },
+    { name: 'About', href: '#about', id: 'about' },
     { name: 'FAQ', href: '#faq', id: 'faq' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // The navbar sticks to the top only when the top notification bar has scrolled completely out of view (rect.bottom <= 0)
+      if (topBarRef.current) {
+        const rect = topBarRef.current.getBoundingClientRect();
+        setIsScrolled(rect.bottom <= 0);
+      } else {
+        setIsScrolled(window.scrollY > 42);
+      }
 
       const scrollPosition = window.scrollY + 120;
 
@@ -53,8 +61,13 @@ export default function Navbar({ activeView, setActiveView }) {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   const scrollToSection = (id) => {
@@ -94,39 +107,37 @@ export default function Navbar({ activeView, setActiveView }) {
   return (
     <>
       {/* Top Notification Bar */}
-      <div className="bg-brand-blue-950 text-slate-300 text-xs py-2 px-4 border-b border-brand-blue-900/60 select-none">
-        <div className="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-
+      <div
+        ref={topBarRef}
+        className="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 select-none"
+      >
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 text-brand-saffron-400 font-medium">
+            <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Clock className="w-3.5 h-3.5" />
               <span>{shopInfo.timings}</span>
             </span>
-
-            <span className="hidden md:inline text-slate-500">•</span>
-
+            <span className="hidden md:inline text-slate-600">•</span>
             <span className="hidden md:flex items-center gap-1.5 text-slate-300">
-              <MapPin className="w-3.5 h-3.5 text-brand-emerald-400" />
+              <MapPin className="w-3.5 h-3.5 text-emerald-400" />
               <span>{shopInfo.city}</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-emerald-500/20 text-brand-emerald-400 border border-brand-emerald-500/30 text-[11px] font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-emerald-400 animate-ping"></span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
               {shopInfo.status}
             </span>
 
+            {/* View Mode Switcher Button */}
             <button
-              onClick={() =>
-                setActiveView(activeView === 'customer' ? 'admin' : 'customer')
-              }
-              className={`text-[11px] font-semibold px-2.5 py-1 rounded-md transition flex items-center gap-1.5 border ${
-                activeView === 'admin'
-                  ? 'bg-brand-saffron-500 text-white border-brand-saffron-400 shadow-sm'
-                  : 'bg-brand-blue-900/80 hover:bg-brand-blue-800 text-slate-200 border-brand-blue-700'
-              }`}
-              title="Toggle between Customer Website and Admin Dashboard"
+              onClick={() => setActiveView(activeView === 'customer' ? 'admin' : 'customer')}
+              className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all flex items-center gap-1.5 border ${activeView === 'admin'
+                  ? 'bg-gradient-to-r from-brand-saffron-500 to-amber-500 text-white border-transparent shadow-sm'
+                  : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'
+                }`}
+              title="Toggle between Public Customer Website and Admin Analytics Dashboard"
             >
               <BarChart3 className="w-3.5 h-3.5" />
               {activeView === 'customer'
@@ -137,15 +148,49 @@ export default function Navbar({ activeView, setActiveView }) {
         </div>
       </div>
 
-      {/* Main Sticky Navbar */}
+      {/* Main Sticky Navbar - Changes to top-bar color (bg-slate-900) when sticking on top or scrolling */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 border-b border-slate-200'
-            : 'bg-white py-3.5 border-b border-slate-100'
-        }`}
+        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled
+            ? 'bg-slate-900/95 backdrop-blur-md shadow-xl py-2.5 border-b border-slate-800 text-white'
+            : 'bg-white/80 backdrop-blur-sm py-3.5 border-b border-slate-100 text-slate-900'
+          }`}
       >
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+
+          {/* Logo & Shop Brand */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="flex items-center gap-3 shrink-0 mr-auto group text-left"
+          >
+            {/* 3D CX Symbol */}
+            <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-xl bg-blue-500/30 blur-lg animate-pulse" />
+
+              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-slate-950 via-blue-800 to-cyan-500 border border-cyan-300/70 shadow-[0_5px_0_#082f70,0_10px_20px_#168bff55] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                <span className="text-4xl font-black italic text-white leading-none drop-shadow-[0_0_10px_#38bdf8]">
+                  C
+                </span>
+
+                <span className="absolute text-xl font-black italic text-cyan-300 right-1 bottom-1 drop-shadow-[0_0_10px_#00d9ff]">
+                  X
+                </span>
+              </div>
+            </div>
+
+            {/* Brand Name */}
+            <div className="flex flex-col justify-center">
+              <span className="text-2xl sm:text-3xl font-black tracking-tighter leading-none whitespace-nowrap">
+                <span className="text-slate-950">cyber</span>
+                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                  Xero
+                </span>
+              </span>
+
+              <span className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-[2px] text-slate-500 uppercase whitespace-nowrap">
+                Advanced Digital Centre
+              </span>
+            </div>
+          </button>
 
  {/* LEFT SIDE - cyberXero Logo */}
 <button
@@ -193,11 +238,12 @@ export default function Navbar({ activeView, setActiveView }) {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className={`px-2.5 xl:px-3 py-2 text-xs font-bold rounded-lg transition-all whitespace-nowrap ${
-                    isActive
-                      ? 'text-brand-blue-700 bg-brand-blue-50 border border-brand-blue-200 shadow-sm'
-                      : 'text-slate-700 hover:text-brand-blue-700 hover:bg-slate-100/70 border border-transparent'
-                  }`}
+                  className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all duration-200 ${isActive
+                      ? 'text-white bg-gradient-to-r from-brand-blue-600 to-indigo-600 shadow-sm shadow-indigo-500/20 scale-[1.02]'
+                      : isScrolled
+                        ? 'text-slate-300 hover:text-white hover:bg-slate-800'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                    }`}
                 >
                   {link.name}
                 </button>
@@ -209,10 +255,13 @@ export default function Navbar({ activeView, setActiveView }) {
           <div className="hidden sm:flex items-center gap-2 shrink-0">
             <a
               href={`tel:${shopInfo.phone.replace(/\s+/g, '')}`}
-              className="inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-2 text-xs font-bold text-brand-blue-800 bg-brand-blue-50 hover:bg-brand-blue-100 rounded-xl border border-brand-blue-200 transition whitespace-nowrap"
-              title="Click to call"
+              className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-2xl transition ${isScrolled
+                  ? 'text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700'
+                  : 'text-slate-700 bg-slate-100/80 hover:bg-slate-200/80 border border-slate-200/70'
+                }`}
+              title="Call helpline"
             >
-              <Phone className="w-3.5 h-3.5 text-brand-blue-600" />
+              <Phone className="w-3.5 h-3.5 text-brand-blue-400" />
               <span>{shopInfo.phoneDisplay}</span>
             </a>
 
@@ -220,9 +269,9 @@ export default function Navbar({ activeView, setActiveView }) {
               href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre%2C%20I%20need%20assistance%20with%20an%20online%20service.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 xl:px-4 py-2 text-xs font-bold text-white bg-brand-emerald-600 hover:bg-brand-emerald-700 rounded-xl shadow-sm hover:shadow-glow-emerald transition-all transform hover:-translate-y-0.5 whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 rounded-2xl shadow-md shadow-emerald-500/20 hover:shadow-glow-emerald transition-all transform hover:-translate-y-0.5"
             >
-              <MessageSquare className="w-3.5 h-3.5 fill-white text-brand-emerald-600" />
+              <MessageSquare className="w-3.5 h-3.5 fill-white" />
               <span>WhatsApp</span>
             </a>
           </div>
@@ -233,15 +282,19 @@ export default function Navbar({ activeView, setActiveView }) {
               href={`https://wa.me/${shopInfo.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-brand-emerald-50 text-brand-emerald-600 border border-brand-emerald-200 sm:hidden"
+              className={`p-2 rounded-xl sm:hidden transition ${isScrolled
+                  ? 'bg-slate-800 text-emerald-400 border border-slate-700'
+                  : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                }`}
               aria-label="WhatsApp"
             >
-              <MessageSquare className="w-5 h-5 fill-brand-emerald-600 text-brand-emerald-600" />
+              <MessageSquare className="w-5 h-5 fill-current" />
             </a>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition"
+              className={`p-2 rounded-xl transition ${isScrolled ? 'text-slate-200 hover:bg-slate-800' : 'text-slate-700 hover:bg-slate-100'
+                }`}
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen
@@ -253,9 +306,11 @@ export default function Navbar({ activeView, setActiveView }) {
 
         {/* Mobile Slide-down Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-1.5 shadow-xl animate-in slide-in-from-top-2 duration-200">
-
-            <div className="py-2 border-b border-slate-100 mb-2">
+          <div className={`lg:hidden border-t px-4 pt-3 pb-6 space-y-1.5 shadow-xl animate-in slide-in-from-top-2 duration-200 ${isScrolled
+              ? 'border-slate-800 bg-slate-900/95 backdrop-blur-md text-white'
+              : 'border-slate-200/80 bg-white/95 backdrop-blur-md text-slate-800'
+            }`}>
+            <div className={`py-2 border-b mb-2 ${isScrolled ? 'border-slate-800' : 'border-slate-100'}`}>
               <button
                 onClick={() => {
                   setActiveView(
@@ -263,13 +318,14 @@ export default function Navbar({ activeView, setActiveView }) {
                   );
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-between p-3 rounded-xl bg-brand-blue-50 text-brand-blue-900 font-bold text-xs border border-brand-blue-200"
+                className={`w-full flex items-center justify-between p-3 rounded-2xl font-bold text-xs border ${isScrolled
+                    ? 'bg-slate-800 text-indigo-300 border-slate-700'
+                    : 'bg-indigo-50 text-brand-blue-900 border-indigo-200/80'
+                  }`}
               >
                 <span className="flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-brand-blue-600" />
-                  {activeView === 'customer'
-                    ? 'Open Admin Analytics Dashboard'
-                    : 'Switch to Customer Website'}
+                  <BarChart3 className="w-4 h-4 text-brand-blue-500" />
+                  {activeView === 'customer' ? 'Open Admin Analytics Dashboard' : 'Switch to Customer Website'}
                 </span>
 
                 <ChevronRight className="w-4 h-4 text-brand-blue-500" />
@@ -285,32 +341,26 @@ export default function Navbar({ activeView, setActiveView }) {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-bold transition flex items-center justify-between ${
-                    isActive
-                      ? 'bg-brand-blue-50 text-brand-blue-800 border border-brand-blue-200'
-                      : 'text-slate-700 hover:bg-slate-100'
-                  }`}
+                  className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${isActive
+                      ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white shadow-sm'
+                      : isScrolled
+                        ? 'text-slate-300 hover:bg-slate-800'
+                        : 'text-slate-700 hover:bg-slate-100'
+                    }`}
                 >
                   <span>{link.name}</span>
-
-                  <ChevronRight
-                    className={`w-3.5 h-3.5 ${
-                      isActive
-                        ? 'text-brand-blue-600'
-                        : 'text-slate-300'
-                    }`}
-                  />
+                  <ChevronRight className={`w-3.5 h-3.5 ${isActive ? 'text-white' : isScrolled ? 'text-slate-600' : 'text-slate-300'}`} />
                 </button>
               );
             })}
 
-            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2 mt-2">
-
+            <div className={`pt-3 border-t flex flex-col gap-2 mt-2 ${isScrolled ? 'border-slate-800' : 'border-slate-100'}`}>
               <a
                 href={`tel:${shopInfo.phone.replace(/\s+/g, '')}`}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-100 text-slate-800 font-bold text-xs"
+                className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-xs transition ${isScrolled ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-800'
+                  }`}
               >
-                <Phone className="w-4 h-4 text-brand-blue-600" />
+                <Phone className="w-4 h-4 text-brand-blue-500" />
                 Call: {shopInfo.phoneDisplay}
               </a>
 
@@ -318,10 +368,10 @@ export default function Navbar({ activeView, setActiveView }) {
                 href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-brand-emerald-600 text-white font-bold text-xs shadow-md"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-xs shadow-md"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
-                WhatsApp
+                WhatsApp: {shopInfo.whatsappDisplay}
               </a>
             </div>
           </div>
