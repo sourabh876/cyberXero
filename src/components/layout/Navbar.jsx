@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Sparkles
 } from 'lucide-react';
+
 import { shopInfo } from '../../data/servicesData';
 
 export default function Navbar({ activeView, setActiveView }) {
@@ -40,8 +41,10 @@ export default function Navbar({ activeView, setActiveView }) {
       }
 
       const scrollPosition = window.scrollY + 120;
+
       for (let i = navLinks.length - 1; i >= 0; i--) {
         const link = navLinks[i];
+
         if (link.id === 'home') {
           if (window.scrollY < 200) {
             setActiveSection('home');
@@ -49,6 +52,7 @@ export default function Navbar({ activeView, setActiveView }) {
           }
         } else {
           const el = document.getElementById(link.id);
+
           if (el && el.offsetTop <= scrollPosition) {
             setActiveSection(link.id);
             break;
@@ -77,6 +81,7 @@ export default function Navbar({ activeView, setActiveView }) {
       }
 
       const element = document.getElementById(id);
+
       if (element) {
         const navHeight = 75;
         const bodyRect = document.body.getBoundingClientRect().top;
@@ -135,7 +140,9 @@ export default function Navbar({ activeView, setActiveView }) {
               title="Toggle between Public Customer Website and Admin Analytics Dashboard"
             >
               <BarChart3 className="w-3.5 h-3.5" />
-              {activeView === 'customer' ? 'Admin Analytics' : '← Customer Website'}
+              {activeView === 'customer'
+                ? 'Admin Analytics'
+                : '← Customer Website'}
             </button>
           </div>
         </div>
@@ -185,10 +192,48 @@ export default function Navbar({ activeView, setActiveView }) {
             </div>
           </button>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1">
+ {/* LEFT SIDE - cyberXero Logo */}
+<button
+  onClick={() => scrollToSection('home')}
+  className="flex items-center gap-3 shrink-0 mr-auto group text-left"
+>
+  {/* 3D CX Symbol */}
+  <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
+    <div className="absolute inset-0 rounded-xl bg-blue-500/30 blur-lg animate-pulse" />
+
+    <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-slate-950 via-blue-800 to-cyan-500 border border-cyan-300/70 shadow-[0_5px_0_#082f70,0_10px_20px_#168bff55] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+      <span className="text-4xl font-black italic text-white leading-none drop-shadow-[0_0_10px_#38bdf8]">
+        C
+      </span>
+
+      <span className="absolute text-xl font-black italic text-cyan-300 right-1 bottom-1 drop-shadow-[0_0_10px_#00d9ff]">
+        X
+      </span>
+    </div>
+  </div>
+
+  {/* Brand Name */}
+  <div className="flex flex-col justify-center">
+    <span className="text-2xl sm:text-3xl font-black tracking-tighter leading-none whitespace-nowrap">
+      <span className="text-slate-950">cyber</span>
+      <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+        Xero
+      </span>
+    </span>
+
+    <span className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-[2px] text-slate-500 uppercase whitespace-nowrap">
+  Advanced Digital Centre
+</span>
+  </div>
+</button>
+
+          {/* RIGHT SIDE - Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 shrink-0">
             {navLinks.map((link) => {
-              const isActive = activeView === 'customer' && activeSection === link.id;
+              const isActive =
+                activeView === 'customer' &&
+                activeSection === link.id;
+
               return (
                 <button
                   key={link.id}
@@ -206,8 +251,8 @@ export default function Navbar({ activeView, setActiveView }) {
             })}
           </nav>
 
-          {/* Right Action CTAs */}
-          <div className="hidden sm:flex items-center gap-2.5">
+          {/* RIGHT SIDE - Phone and WhatsApp */}
+          <div className="hidden sm:flex items-center gap-2 shrink-0">
             <a
               href={`tel:${shopInfo.phone.replace(/\s+/g, '')}`}
               className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-2xl transition ${isScrolled
@@ -231,8 +276,8 @@ export default function Navbar({ activeView, setActiveView }) {
             </a>
           </div>
 
-          {/* Mobile Menu Hamburger Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Menu */}
+          <div className="flex items-center gap-2 lg:hidden shrink-0">
             <a
               href={`https://wa.me/${shopInfo.whatsappNumber}`}
               target="_blank"
@@ -252,10 +297,11 @@ export default function Navbar({ activeView, setActiveView }) {
                 }`}
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen
+                ? <X className="w-6 h-6" />
+                : <Menu className="w-6 h-6" />}
             </button>
           </div>
-
         </div>
 
         {/* Mobile Slide-down Drawer */}
@@ -267,7 +313,9 @@ export default function Navbar({ activeView, setActiveView }) {
             <div className={`py-2 border-b mb-2 ${isScrolled ? 'border-slate-800' : 'border-slate-100'}`}>
               <button
                 onClick={() => {
-                  setActiveView(activeView === 'customer' ? 'admin' : 'customer');
+                  setActiveView(
+                    activeView === 'customer' ? 'admin' : 'customer'
+                  );
                   setMobileMenuOpen(false);
                 }}
                 className={`w-full flex items-center justify-between p-3 rounded-2xl font-bold text-xs border ${isScrolled
@@ -279,12 +327,16 @@ export default function Navbar({ activeView, setActiveView }) {
                   <BarChart3 className="w-4 h-4 text-brand-blue-500" />
                   {activeView === 'customer' ? 'Open Admin Analytics Dashboard' : 'Switch to Customer Website'}
                 </span>
+
                 <ChevronRight className="w-4 h-4 text-brand-blue-500" />
               </button>
             </div>
 
             {navLinks.map((link) => {
-              const isActive = activeView === 'customer' && activeSection === link.id;
+              const isActive =
+                activeView === 'customer' &&
+                activeSection === link.id;
+
               return (
                 <button
                   key={link.id}
@@ -311,6 +363,7 @@ export default function Navbar({ activeView, setActiveView }) {
                 <Phone className="w-4 h-4 text-brand-blue-500" />
                 Call: {shopInfo.phoneDisplay}
               </a>
+
               <a
                 href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre`}
                 target="_blank"
