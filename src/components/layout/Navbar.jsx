@@ -33,15 +33,15 @@ export default function Navbar({ activeView, setActiveView }) {
   useEffect(() => {
     const handleScroll = () => {
       // The navbar sticks to the top only when the top notification bar has scrolled completely out of view (rect.bottom <= 0)
-if (topBarRef.current) {
-  const rect = topBarRef.current.getBoundingClientRect();
+      if (topBarRef.current) {
+        const rect = topBarRef.current.getBoundingClientRect();
 
-  setIsScrolled((current) =>
-    current ? rect.bottom < 8 : rect.bottom <= -8
-  );
-} else {
-  setIsScrolled(window.scrollY > 50);
-}
+        setIsScrolled((current) =>
+          current ? rect.bottom < 4 : rect.bottom <= 0
+        );
+      } else {
+        setIsScrolled(window.scrollY > 50);
+      }
 
       const scrollPosition = window.scrollY + 120;
 
@@ -137,8 +137,8 @@ if (topBarRef.current) {
             <button
               onClick={() => setActiveView(activeView === 'customer' ? 'admin' : 'customer')}
               className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all flex items-center gap-1.5 border ${activeView === 'admin'
-                  ? 'bg-gradient-to-r from-brand-saffron-500 to-amber-500 text-white border-transparent shadow-sm'
-                  : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'
+                ? 'bg-gradient-to-r from-brand-saffron-500 to-amber-500 text-white border-transparent shadow-sm'
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'
                 }`}
               title="Toggle between Public Customer Website and Admin Analytics Dashboard"
             >
@@ -153,12 +153,11 @@ if (topBarRef.current) {
 
       {/* Main Sticky Navbar - Changes to top-bar color (bg-slate-900) when sticking on top or scrolling */}
       <header
-  className={`sticky top-0 z-40 transition-all duration-200 ease-in-out ${
-    isScrolled
-      ? 'bg-slate-900 shadow-xl py-2.5 border-b border-slate-800 text-white'
-      : 'bg-white py-3.5 border-b border-slate-100 text-slate-900'
-  }`}
->
+        className={`sticky top-0 z-40 transition-all duration-200 ease-in-out ${isScrolled
+          ? 'bg-slate-900 shadow-xl py-2.5 border-b border-slate-800 text-white'
+          : 'bg-white py-3.5 border-b border-slate-100 text-slate-900'
+          }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
 
           {/* Logo & Shop Brand */}
@@ -207,10 +206,10 @@ if (topBarRef.current) {
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
                   className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all duration-200 ${isActive
-                      ? 'text-white bg-gradient-to-r from-brand-blue-600 to-indigo-600 shadow-sm shadow-indigo-500/20 scale-[1.02]'
-                      : isScrolled
-                        ? 'text-slate-300 hover:text-white hover:bg-slate-800'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                    ? 'text-white bg-gradient-to-r from-brand-blue-600 to-indigo-600 shadow-sm shadow-indigo-500/20 scale-[1.02]'
+                    : isScrolled
+                      ? 'text-slate-300 hover:text-white hover:bg-slate-800'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                     }`}
                 >
                   {link.name}
@@ -224,8 +223,8 @@ if (topBarRef.current) {
             <a
               href={`tel:${shopInfo.phone.replace(/\s+/g, '')}`}
               className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-2xl transition ${isScrolled
-                  ? 'text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700'
-                  : 'text-slate-700 bg-slate-100/80 hover:bg-slate-200/80 border border-slate-200/70'
+                ? 'text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700'
+                : 'text-slate-700 bg-slate-100/80 hover:bg-slate-200/80 border border-slate-200/70'
                 }`}
               title="Call helpline"
             >
@@ -251,8 +250,8 @@ if (topBarRef.current) {
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-xl sm:hidden transition ${isScrolled
-                  ? 'bg-slate-800 text-emerald-400 border border-slate-700'
-                  : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                ? 'bg-slate-800 text-emerald-400 border border-slate-700'
+                : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
                 }`}
               aria-label="WhatsApp"
             >
@@ -275,8 +274,8 @@ if (topBarRef.current) {
         {/* Mobile Slide-down Drawer */}
         {mobileMenuOpen && (
           <div className={`lg:hidden border-t px-4 pt-3 pb-6 space-y-1.5 shadow-xl animate-in slide-in-from-top-2 duration-200 ${isScrolled
-              ? 'border-slate-800 bg-slate-900/95 backdrop-blur-md text-white'
-              : 'border-slate-200/80 bg-white/95 backdrop-blur-md text-slate-800'
+            ? 'border-slate-800 bg-slate-900/95 backdrop-blur-md text-white'
+            : 'border-slate-200/80 bg-white/95 backdrop-blur-md text-slate-800'
             }`}>
             <div className={`py-2 border-b mb-2 ${isScrolled ? 'border-slate-800' : 'border-slate-100'}`}>
               <button
@@ -287,8 +286,8 @@ if (topBarRef.current) {
                   setMobileMenuOpen(false);
                 }}
                 className={`w-full flex items-center justify-between p-3 rounded-2xl font-bold text-xs border ${isScrolled
-                    ? 'bg-slate-800 text-indigo-300 border-slate-700'
-                    : 'bg-indigo-50 text-brand-blue-900 border-indigo-200/80'
+                  ? 'bg-slate-800 text-indigo-300 border-slate-700'
+                  : 'bg-indigo-50 text-brand-blue-900 border-indigo-200/80'
                   }`}
               >
                 <span className="flex items-center gap-2">
@@ -310,10 +309,10 @@ if (topBarRef.current) {
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${isActive
-                      ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white shadow-sm'
-                      : isScrolled
-                        ? 'text-slate-300 hover:bg-slate-800'
-                        : 'text-slate-700 hover:bg-slate-100'
+                    ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white shadow-sm'
+                    : isScrolled
+                      ? 'text-slate-300 hover:bg-slate-800'
+                      : 'text-slate-700 hover:bg-slate-100'
                     }`}
                 >
                   <span>{link.name}</span>
