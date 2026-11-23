@@ -26,13 +26,13 @@ export default function FaqSection() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Got Questions?</span>
+            <span>Clear Answers</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Frequently Asked Questions
+            Got Questions? We Have Answers.
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Quick answers about document safety, WhatsApp printing, and fee breakdowns.
+            Quick, honest details on document safety, WhatsApp printing, and counter fees.
           </p>
         </div>
 
@@ -89,8 +89,8 @@ export default function FaqSection() {
             <div className="bg-slate-50/80 rounded-3xl p-6 sm:p-7 border border-slate-200/70 shadow-sm">
               <div className="flex items-center justify-between mb-5 border-b border-slate-200/70 pb-3">
                 <div>
-                  <h3 className="font-extrabold text-base text-slate-900 tracking-tight">Citizen Feedback</h3>
-                  <p className="text-xs text-slate-500">Real walk-in experiences</p>
+                  <h3 className="font-extrabold text-base text-slate-900 tracking-tight">Real Customer Reviews</h3>
+                  <p className="text-xs text-slate-500">Genuine feedback from local walk-in visitors</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-amber-600 text-xs font-black bg-amber-50 px-2.5 py-1 rounded-xl border border-amber-200">
                   <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />

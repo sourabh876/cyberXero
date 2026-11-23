@@ -85,9 +85,9 @@ export default function PriceCalculator() {
           </div>
           <div>
             <h3 className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight">
-              Instant Cost Estimator
+              Estimate Cost in Seconds
             </h3>
-            <p className="text-xs text-slate-500">Calculate estimated counter charges in seconds</p>
+            <p className="text-xs text-slate-500">Pick your pages, scans, and forms for an instant total</p>
           </div>
         </div>
 

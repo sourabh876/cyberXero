@@ -387,9 +387,9 @@ export const trustHighlights = [
 
 export const shopInfo = {
   name: 'Digital Seva & Cyber Service Centre',
-  tagline: 'Your Trusted Documentation & Digital Centre',
-  headline: 'All Your Online & Document Work, Made Simple.',
-  subheadline: 'From government job forms and KYC uploads to laser printing, xerox, and spiral binding — fast, friendly walk-in assistance with upfront pricing.',
+  tagline: 'Fast, Trusted Digital & Documentation Help',
+  headline: 'Smart Digital Help, Done in Minutes.',
+  subheadline: 'From govt exam forms and KYC to high-speed laser prints — zero errors, patient guidance, and upfront pricing.',
   contactPerson: 'Demo Coordinator: Rajesh Sharma (Operator In-Charge)',
   phone: '+91 98000 00000',
   phoneDisplay: '+91 98000 00000',

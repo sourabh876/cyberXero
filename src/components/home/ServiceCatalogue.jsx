@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { 
   Search, 
   X, 
@@ -16,6 +16,7 @@ import {
   Camera, 
   LayoutGrid,
   ChevronRight,
+  ChevronLeft,
   FileText
 } from 'lucide-react';
 import { serviceCategories, servicesData, shopInfo } from '../../data/servicesData';
@@ -25,6 +26,31 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedService, setSelectedService] = useState(null);
+  const sliderRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    if (sliderRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, []);
+
+  const scrollSlider = (direction) => {
+    if (sliderRef.current) {
+      const scrollAmount = direction === 'left' ? -260 : 260;
+      sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      setTimeout(checkScroll, 300);
+    }
+  };
 
   // Category Icon Lookup
   const getCategoryIcon = (iconName) => {
@@ -77,13 +103,13 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
         {/* Header - Crisp and modern */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
-            <span>Verified Service Directory</span>
+            <span>20+ Verified Services</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Complete Services Catalogue
+            Everything We Can Do For You
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Search any form, print rate, or document requirement. Click any card for the checklist.
+            Search forms, check photo specs, or find rates. Tap any card for the full document checklist.
           </p>
         </div>
 
@@ -112,26 +138,52 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
             )}
           </div>
 
-          {/* Category Filter Pills (Scrollable with smooth indicator) */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-none justify-start lg:justify-center">
-            {serviceCategories.map((cat) => {
-              const Icon = getCategoryIcon(cat.icon);
-              const isActive = selectedCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 border ${
-                    isActive
-                      ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white border-brand-blue-700 shadow-md shadow-brand-blue-600/25 scale-[1.02]'
-                      : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/90'
-                  }`}
-                >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-300' : 'text-slate-500'}`} />
-                  <span>{cat.name}</span>
-                </button>
-              );
-            })}
+          {/* Category Filter Pills (Scrollable Slider with Chevrons) */}
+          <div className="relative max-w-5xl mx-auto px-1 sm:px-4">
+            {canScrollLeft && (
+              <button
+                onClick={() => scrollSlider('left')}
+                className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/95 shadow-md border border-slate-200 items-center justify-center text-slate-700 hover:bg-slate-50 transition"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+            )}
+
+            <div
+              ref={sliderRef}
+              onScroll={checkScroll}
+              className="flex items-center gap-2.5 overflow-x-auto py-2.5 px-3 sm:px-4 scrollbar-none no-scrollbar justify-start"
+            >
+              {serviceCategories.map((cat) => {
+                const Icon = getCategoryIcon(cat.icon);
+                const isActive = selectedCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all duration-200 border shrink-0 ${
+                      isActive
+                        ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white border-brand-blue-700 shadow-md shadow-brand-blue-600/25 ring-2 ring-brand-blue-400/30'
+                        : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/90'
+                    }`}
+                  >
+                    <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-300' : 'text-slate-500'}`} />
+                    <span>{cat.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {canScrollRight && (
+              <button
+                onClick={() => scrollSlider('right')}
+                className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/95 shadow-md border border-slate-200 items-center justify-center text-slate-700 hover:bg-slate-50 transition"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
         </div>

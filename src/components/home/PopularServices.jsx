@@ -87,13 +87,13 @@ export default function PopularServices({ onSelectService, onViewAllClick }) {
           <div>
             <div className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-saffron-600 uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Most Requested Services</span>
+              <span>Instant Counter Favorites</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Popular Counter Services
+              Most Requested Daily Services
             </h2>
             <p className="text-sm text-slate-500 mt-1 max-w-xl">
-              Fast-track access to our highest-volume daily documentation tasks
+              Our fastest, highest-demand counter tasks ready in under 5 minutes.
             </p>
           </div>
 

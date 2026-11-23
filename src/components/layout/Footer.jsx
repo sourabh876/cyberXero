@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
-  FileText, 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
-  ShieldCheck, 
-  MessageSquare, 
+import {
+  FileText,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  ShieldCheck,
+  MessageSquare,
   ChevronRight,
   UserCheck
 } from 'lucide-react';
@@ -25,23 +25,53 @@ export default function Footer({ onNavigate }) {
   return (
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800 pt-16 pb-12 select-none relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
-          
+
           {/* Col 1: Shop Brand & About */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-blue-600 via-indigo-600 to-brand-purple-600 flex items-center justify-center text-white shadow-md">
-                <FileText className="w-5 h-5 text-amber-300" />
-              </div>
+               
               <span className="font-extrabold text-xl text-white tracking-tight">
-                DIGITAL <span className="text-brand-saffron-500">SEVA</span>
+                <button
+                  onClick={() => scrollToSection('home')}
+                  className="flex items-center gap-3 shrink-0 mr-auto group text-left"
+                >
+                  {/* 3D CX Symbol */}
+                  <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-xl bg-blue-500/30 blur-lg animate-pulse" />
+
+                    <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-slate-950 via-blue-800 to-cyan-500 border border-cyan-300/70 shadow-[0_5px_0_#082f70,0_10px_20px_#168bff55] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                      <span className="text-4xl font-black italic text-white leading-none drop-shadow-[0_0_10px_#38bdf8]">
+                        C
+                      </span>
+
+                      <span className="absolute text-xl font-black italic text-cyan-300 right-1 bottom-1 drop-shadow-[0_0_10px_#00d9ff]">
+                        X
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Brand Name */}
+                  <div className="flex flex-col justify-center">
+                    <span className="text-2xl sm:text-3xl font-black tracking-tighter leading-none whitespace-nowrap">
+                      <span className="text-slate-950">cyber</span>
+                      <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                        Xero
+                      </span>
+                    </span>
+
+                    <span className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-[2px] text-slate-500 uppercase whitespace-nowrap">
+                      Advanced Digital Centre
+                    </span>
+                  </div>
+                </button>
               </span>
             </div>
-            
+
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Your neighbourhood centre for government exam forms, KYC uploads, fast Xerox, color laser prints, and student documentation.
+              Your trusted counter for fast exam forms, verified KYC uploads, laser printing, and Xerox. Zero errors, upfront rates.
             </p>
 
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs text-emerald-400 font-semibold">
@@ -149,10 +179,10 @@ export default function Footer({ onNavigate }) {
               </div>
               <div className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a 
-                  href={`https://wa.me/${shopInfo.whatsappNumber}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={`https://wa.me/${shopInfo.whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-white transition text-emerald-400 font-semibold"
                 >
                   WhatsApp: {shopInfo.whatsappDisplay}
@@ -179,7 +209,7 @@ export default function Footer({ onNavigate }) {
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-          <p>© {new Date().getFullYear()} Digital Seva Centre. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} cyberXero.  All rights reserved.</p>
           <div className="flex items-center gap-4 text-[11px]">
             <span className="text-slate-400">Strict OTP Safe</span>
             <span>•</span>

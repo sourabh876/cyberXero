@@ -28,13 +28,13 @@ export default function PricingTable() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-brand-saffron-500" />
-            <span>Honest & Upfront Rates</span>
+            <span>Honest & Upfront</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Transparent Pricing & Rate Card
+            Clear Rates, Zero Surprises
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            100% price transparency. Shop assistance and official statutory fees are always itemized separately.
+            Every service charge is clearly itemized with separate official government receipts.
           </p>
         </div>
 
@@ -50,25 +50,25 @@ export default function PricingTable() {
           <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">Standard Service Rate Card</h3>
+                <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">Official Rate Card</h3>
                 <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-brand-blue-700 border border-indigo-100">
                   {filteredRows.length} Services
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">Indicative counter assistance fees per unit</p>
+              <p className="text-xs text-slate-500 mt-0.5">Fixed, transparent fees per task or page</p>
             </div>
 
             {/* Filter Pills */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto py-1 px-1 scrollbar-none no-scrollbar justify-start">
               {categories.map((cat) => {
                 const isActive = filterCategory === cat;
                 return (
                   <button
                     key={cat}
                     onClick={() => setFilterCategory(cat)}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap shrink-0 transition-all duration-200 ${
                       isActive
-                        ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white shadow-sm shadow-indigo-500/20 scale-[1.02]'
+                        ? 'bg-gradient-to-r from-brand-blue-600 to-indigo-600 text-white shadow-sm shadow-indigo-500/20 ring-2 ring-brand-blue-400/30'
                         : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-600'
                     }`}
                   >

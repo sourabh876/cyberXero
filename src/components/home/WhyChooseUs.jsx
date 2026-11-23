@@ -70,13 +70,13 @@ export default function WhyChooseUs() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-brand-blue-500" />
-            <span>Why Citizens Choose Us</span>
+            <span>The Local Advantage</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Built for Privacy, Speed & Precision
+            Why Hundreds Trust Us Daily
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Every workflow is designed to save you time and protect your personal information.
+            High-speed dual laser printers, zero password storage, and 100% portal compliance.
           </p>
         </div>
 

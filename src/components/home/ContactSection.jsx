@@ -52,13 +52,13 @@ export default function ContactSection() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-brand-blue-500" />
-            <span>Counter & Contact Details</span>
+            <span>Quick Connect</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Visit Our Centre or Message Us
+            Visit or Message in Seconds
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Near public transport, the Tehsil complex, and the Head Post Office.
+            Walk into our centre near the Tehsil Complex or send an instant WhatsApp query.
           </p>
         </div>
 
@@ -177,10 +177,10 @@ export default function ContactSection() {
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/70 shadow-sm">
               <div className="border-b border-slate-100 pb-4 mb-6">
                 <h3 className="font-extrabold text-lg text-slate-900 tracking-tight">
-                  Send a Quick Service Enquiry
+                  Send an Instant Enquiry
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Have an urgent form deadline or document query? Leave your number and we will reply promptly.
+                  Facing a deadline? Send your query and get an operator response in minutes.
                 </p>
               </div>
 

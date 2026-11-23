@@ -55,13 +55,13 @@ export default function HowItWorks() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Smooth 4-Step Process</span>
+            <span>Simple & Stress-Free</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            How Assisted Service Works
+            4 Easy Steps to Done
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Zero portal errors, no queues, and total price transparency from start to finish.
+            No portal confusion, no long waits. Here is how your walk-in gets solved from arrival to print.
           </p>
         </div>
 
@@ -122,9 +122,9 @@ export default function HowItWorks() {
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mb-1">
               ⚡ Express WhatsApp Queue
             </span>
-            <h4 className="text-lg sm:text-xl font-extrabold">In a hurry? Send files on WhatsApp before visiting!</h4>
+            <h4 className="text-lg sm:text-xl font-extrabold">Skip the Line with WhatsApp</h4>
             <p className="text-xs text-slate-300 max-w-xl">
-              Forward PDFs, admit cards, or job documents. We prepare and print them so you can collect in 2 minutes.
+              Send files before you leave home. We'll have your prints ready the moment you walk in.
             </p>
           </div>
 

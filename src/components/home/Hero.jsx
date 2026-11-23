@@ -30,22 +30,20 @@ export default function Hero({ onExploreClick }) {
             {/* Eyebrow Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider shadow-sm backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-brand-saffron-500 animate-pulse" />
-              <span>Digital Seva • Online Forms • High-Speed Xerox</span>
+              <span>Fast Digital Seva • Online Forms • Speed Xerox</span>
             </div>
 
-            {/* Main Headline */}
+            {/* Main Headline - Short & Catchy */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
-              All Your <span className="bg-gradient-to-r from-brand-blue-600 via-brand-purple-600 to-indigo-700 bg-clip-text text-transparent">Document & Online Work</span>, Made{' '}
-              <span className="relative whitespace-nowrap">
-                <span className="relative z-10 text-brand-saffron-500 underline decoration-brand-saffron-400 decoration-wavy decoration-2">
-                  Effortless.
-                </span>
+              Smart Digital Help,{' '}
+              <span className="bg-gradient-to-r from-brand-blue-600 via-brand-purple-600 to-indigo-700 bg-clip-text text-transparent">
+                Done in Minutes.
               </span>
             </h1>
 
-            {/* Punchy Supporting Copy (not book-like) */}
+            {/* Punchy Supporting Copy */}
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Quick walk-in assistance for govt exam forms, KYC uploads, laser printing, and Xerox. Patient guidance, zero portal rejections, and clear upfront pricing.
+              From online exam forms and KYC to high-speed laser prints. Walk in with documents, walk out with confirmed submissions.
             </p>
 
             {/* Vibrant CTA Buttons */}

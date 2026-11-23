@@ -41,11 +41,11 @@ export default function AboutSection({ onExploreClick }) {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              A Dedicated <span className="bg-gradient-to-r from-brand-blue-600 to-indigo-600 bg-clip-text text-transparent">Digital Seva & Documentation</span> Counter
+              Your Local <span className="bg-gradient-to-r from-brand-blue-600 to-indigo-600 bg-clip-text text-transparent">Paperwork & Tech Partner</span>
             </h2>
 
             <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
-              Navigating online government portals, specific photo upload sizes, and submission deadlines shouldn't be stressful. We provide patient, technically accurate assistance right in your neighbourhood.
+              We take the headache out of complex online portals, tricky photo resizing, and high-stakes recruitment deadlines.
             </p>
 
             {/* 3 Modern Differentiator Cards (instead of heavy text paragraph) */}
@@ -101,8 +101,8 @@ export default function AboutSection({ onExploreClick }) {
             <div className="bg-slate-50/80 rounded-3xl p-6 sm:p-8 border border-slate-200/70 shadow-sm">
               <div className="flex items-center justify-between mb-6 border-b border-slate-200/70 pb-4">
                 <div>
-                  <h3 className="font-extrabold text-lg text-slate-900 tracking-tight">Who We Assist Daily</h3>
-                  <p className="text-xs text-slate-500">Tailored support for everyday citizen needs</p>
+                  <h3 className="font-extrabold text-lg text-slate-900 tracking-tight">Who We Help Everyday</h3>
+                  <p className="text-xs text-slate-500">Tailored assistance for every citizen & student</p>
                 </div>
                 <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-brand-blue-600 flex items-center justify-center border border-indigo-100 shadow-xs">
                   <Users className="w-5 h-5" />
