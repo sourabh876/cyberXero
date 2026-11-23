@@ -31,7 +31,9 @@ export default function Navbar({ activeView, setActiveView }) {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateNavbar = () => {
       // The navbar sticks to the top only when the top notification bar has scrolled completely out of view (rect.bottom <= 0)
       if (topBarRef.current) {
         const rect = topBarRef.current.getBoundingClientRect();
@@ -59,9 +61,17 @@ export default function Navbar({ activeView, setActiveView }) {
           }
         }
       }
+      ticking = false;
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    };
+
+    updateNavbar();
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
     return () => {

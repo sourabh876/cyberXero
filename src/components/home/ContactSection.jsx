@@ -45,7 +45,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 py-16 lg:py-24 bg-slate-50/70 border-b border-slate-200/70 relative">
+    <section id="contact" className="scroll-mt-24 py-16 lg:py-24 bg-slate-50/70 border-b border-slate-200/70 relative render-content-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
