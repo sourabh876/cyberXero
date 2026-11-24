@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/home/Hero';
@@ -11,10 +11,12 @@ import AboutSection from './components/home/AboutSection';
 import WhyChooseUs from './components/home/WhyChooseUs';
 import FaqSection from './components/home/FaqSection';
 import ContactSection from './components/home/ContactSection';
-import ServiceDetailModal from './components/home/ServiceDetailModal';
-import RevenueDashboard from './components/admin/RevenueDashboard';
 import { shopInfo } from './data/servicesData';
 import { MessageSquare } from 'lucide-react';
+
+// Code-split heavy non-critical components to minimize initial render time
+const ServiceDetailModal = lazy(() => import('./components/home/ServiceDetailModal'));
+const RevenueDashboard = lazy(() => import('./components/admin/RevenueDashboard'));
 
 export default function App() {
   const [activeView, setActiveView] = useState('customer');
@@ -80,20 +82,33 @@ export default function App() {
             <ContactSection />
           </>
         ) : (
-          /* Admin Operations & Revenue Analytics Dashboard (Section 10 of doc) */
-          <RevenueDashboard onBackToWebsite={() => setActiveView('customer')} />
+          /* Admin Operations & Revenue Analytics Dashboard (Lazy Loaded) */
+          <Suspense
+            fallback={
+              <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 bg-slate-900 text-white">
+                <div className="w-12 h-12 border-4 border-indigo-500/20 border-t-cyan-400 rounded-full animate-spin mb-4" />
+                <p className="text-sm font-semibold text-slate-300">Loading Business Dashboard...</p>
+              </div>
+            }
+          >
+            <RevenueDashboard onBackToWebsite={() => setActiveView('customer')} />
+          </Suspense>
         )}
       </main>
 
       {/* Footer */}
       <Footer onNavigate={scrollToSection} />
 
-      {/* Detail Modal for Selected Service */}
-      <ServiceDetailModal
-        service={selectedServiceForModal}
-        isOpen={Boolean(selectedServiceForModal)}
-        onClose={() => setSelectedServiceForModal(null)}
-      />
+      {/* Detail Modal for Selected Service (Lazy Loaded On Demand) */}
+      {selectedServiceForModal && (
+        <Suspense fallback={null}>
+          <ServiceDetailModal
+            service={selectedServiceForModal}
+            isOpen={Boolean(selectedServiceForModal)}
+            onClose={() => setSelectedServiceForModal(null)}
+          />
+        </Suspense>
+      )}
 
       {/* Floating Action Button: Demo WhatsApp Quick Connect */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 select-none">

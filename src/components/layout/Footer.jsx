@@ -32,42 +32,40 @@ export default function Footer({ onNavigate }) {
           {/* Col 1: Shop Brand & About */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-               
-              <span className="font-extrabold text-xl text-white tracking-tight">
-                <button
-                  onClick={() => scrollToSection('home')}
-                  className="flex items-center gap-3 shrink-0 mr-auto group text-left"
-                >
-                  {/* 3D CX Symbol */}
-                  <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
-                    <div className="absolute inset-0 rounded-xl bg-blue-500/30 blur-lg animate-pulse" />
+              <button
+                onClick={() => handleScroll('home')}
+                className="flex items-center gap-3 shrink-0 mr-auto group text-left"
+                aria-label="cyberXero Home"
+              >
+                {/* 3D CX Symbol */}
+                <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-xl bg-blue-500/30 blur-lg animate-pulse" />
 
-                    <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-slate-950 via-blue-800 to-cyan-500 border border-cyan-300/70 shadow-[0_5px_0_#082f70,0_10px_20px_#168bff55] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                      <span className="text-4xl font-black italic text-white leading-none drop-shadow-[0_0_10px_#38bdf8]">
-                        C
-                      </span>
-
-                      <span className="absolute text-xl font-black italic text-cyan-300 right-1 bottom-1 drop-shadow-[0_0_10px_#00d9ff]">
-                        X
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Brand Name */}
-                  <div className="flex flex-col justify-center">
-                    <span className="text-2xl sm:text-3xl font-black tracking-tighter leading-none whitespace-nowrap">
-                      <span className="text-slate-950">cyber</span>
-                      <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-                        Xero
-                      </span>
+                  <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-slate-950 via-blue-800 to-cyan-500 border border-cyan-300/70 shadow-[0_5px_0_#082f70,0_10px_20px_#168bff55] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                    <span className="text-4xl font-black italic text-white leading-none drop-shadow-[0_0_10px_#38bdf8]">
+                      C
                     </span>
 
-                    <span className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-[2px] text-slate-500 uppercase whitespace-nowrap">
-                      Advanced Digital Centre
+                    <span className="absolute text-xl font-black italic text-cyan-300 right-1 bottom-1 drop-shadow-[0_0_10px_#00d9ff]">
+                      X
                     </span>
                   </div>
-                </button>
-              </span>
+                </div>
+
+                {/* Brand Name - Highly visible on dark background */}
+                <div className="flex flex-col justify-center">
+                  <span className="text-2xl sm:text-3xl font-black tracking-tighter leading-none whitespace-nowrap">
+                    <span className="text-white">cyber</span>
+                    <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-400 bg-clip-text text-transparent">
+                      Xero
+                    </span>
+                  </span>
+
+                  <span className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-[2px] text-slate-400 uppercase whitespace-nowrap">
+                    Advanced Digital Centre
+                  </span>
+                </div>
+              </button>
             </div>
 
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">

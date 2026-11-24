@@ -117,3 +117,9 @@
 .animate-pulse-glow {
   animation: pulse-glow 4s ease-in-out infinite;
 }
+
+/* Modern Performance Optimizations: Skip off-screen paint & layout */
+.render-content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}

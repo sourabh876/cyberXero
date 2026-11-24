@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect, lazy, Suspense } from 'react';
 import { 
   Search, 
   X, 
@@ -20,7 +20,7 @@ import {
   FileText
 } from 'lucide-react';
 import { serviceCategories, servicesData, shopInfo } from '../../data/servicesData';
-import ServiceDetailModal from './ServiceDetailModal';
+const ServiceDetailModal = lazy(() => import('./ServiceDetailModal'));
 
 export default function ServiceCatalogue({ initialCategory = 'all' }) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
@@ -292,12 +292,16 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
 
       </div>
 
-      {/* Service Detail Modal */}
-      <ServiceDetailModal
-        service={selectedService}
-        isOpen={Boolean(selectedService)}
-        onClose={() => setSelectedService(null)}
-      />
+      {/* Service Detail Modal (Loaded On Demand) */}
+      {selectedService && (
+        <Suspense fallback={null}>
+          <ServiceDetailModal
+            service={selectedService}
+            isOpen={Boolean(selectedService)}
+            onClose={() => setSelectedService(null)}
+          />
+        </Suspense>
+      )}
     </section>
   );
 }

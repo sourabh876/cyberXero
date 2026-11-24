@@ -48,7 +48,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="scroll-mt-24 py-16 lg:py-24 bg-gradient-to-b from-slate-50 via-indigo-50/20 to-slate-50 border-b border-slate-200/70 relative">
+    <section id="how-it-works" className="scroll-mt-24 py-16 lg:py-24 bg-gradient-to-b from-slate-50 via-indigo-50/20 to-slate-50 border-b border-slate-200/70 relative render-content-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

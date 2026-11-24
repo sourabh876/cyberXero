@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="cx-bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="45%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="cx-border" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="cx-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="16" flood-color="#38bdf8" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  
+  <!-- Squircle rounded background -->
+  <rect x="24" y="24" width="464" height="464" rx="120" fill="url(#cx-bg)" stroke="url(#cx-border)" stroke-width="24"/>
+  
+  <!-- Stylized Monogram CX -->
+  <g filter="url(#cx-glow)">
+    <!-- Letter C -->
+    <text x="145" y="360" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-style="italic" font-size="330" fill="#ffffff" text-anchor="middle">C</text>
+    <!-- Letter X -->
+    <text x="350" y="410" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-style="italic" font-size="220" fill="#38bdf8" text-anchor="middle">X</text>
+  </g>
+</svg>
