@@ -385,15 +385,8 @@ export default function Navbar({ activeView, setActiveView }) {
             </div>
 
           </button>
-
-
-
-          {/* =====================================
-              DESKTOP NAVIGATION LINKS
-          ====================================== */}
-
-          <nav className="hidden lg:flex items-center mx-3 gap-1 xl:gap-2 shrink-0">
-
+          {/* RIGHT SIDE - Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 shrink-0">
             {navLinks.map((link) => {
 
               const isActive =
