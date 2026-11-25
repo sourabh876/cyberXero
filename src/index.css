@@ -123,3 +123,79 @@
   content-visibility: auto;
   contain-intrinsic-size: 1px 700px;
 }
+
+
+
+
+
+
+
+/* CyberXero Light Background Theme */
+
+body {
+  background-color: #f8faff;
+}
+
+/* Home */
+#home,
+.theme-home {
+  background: linear-gradient(
+    135deg, #e8f2ff, #f5faff
+  ) !important;
+}
+
+/* Popular Services */
+.theme-popular-services {
+  background: #f1edff !important;
+}
+
+/* Services */
+#services,
+.theme-services {
+  background: #edf5ff !important;
+}
+
+/* How It Works */
+#how-it-works,
+.theme-how-it-works {
+  background: #eaf8f0 !important;
+}
+
+/* Pricing */
+#pricing,
+.theme-pricing {
+  background: #fff1e6 !important;
+}
+
+/* Price Calculator */
+.theme-calculator {
+  background: #fff9e8 !important;
+}
+
+/* About */
+#about,
+.theme-about {
+  background: #eaf4ff !important;
+}
+
+/* FAQ */
+#faq,
+.theme-faq {
+  background: #f4edff !important;
+}
+
+/* Contact */
+#contact,
+.theme-contact {
+  background: #e9f9f5 !important;
+}
+
+/* Why Choose Us */
+.theme-why-choose-us {
+  background: #fff0f6 !important;
+}
+
+/* Trust Strip */
+.theme-trust-strip {
+  background: #eef2ff !important;
+}

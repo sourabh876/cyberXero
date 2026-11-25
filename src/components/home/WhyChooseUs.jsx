@@ -1,126 +1,183 @@
+
 import React from 'react';
-import { 
-  ShieldCheck, 
-  Clock, 
-  Cpu, 
-  Coins, 
-  Printer, 
+
+import {
+  ShieldCheck,
   HeartHandshake,
+  Cpu,
+  Printer,
+  Coins,
+  Clock,
   Sparkles
 } from 'lucide-react';
-import { shopInfo } from '../../data/servicesData';
 
 export default function WhyChooseUs() {
+
   const reasons = [
     {
       title: 'Customer-Controlled OTPs',
-      desc: 'You enter OTPs and PINs yourself. We never ask for or store confidential credentials.',
-      tag: 'Zero Data Stored',
+      description:
+        'You enter OTPs and PINs yourself. We never ask for or store confidential credentials.',
       icon: ShieldCheck,
+      tag: 'ZERO DATA STORED',
       gradient: 'from-emerald-500 to-teal-600',
       tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-100'
     },
     {
       title: 'Patient & Trained Staff',
-      desc: 'Careful double-check of candidate name, DOB, and category quotas before payment.',
-      tag: 'Error-Free Filing',
+      description:
+        'Careful double-check of candidate name, DOB, and category quotas before payment.',
       icon: HeartHandshake,
-      gradient: 'from-indigo-500 to-blue-600',
-      tagColor: 'bg-indigo-50 text-brand-blue-700 border-indigo-100'
+      tag: 'ERROR-FREE FILING',
+      gradient: 'from-blue-500 to-indigo-600',
+      tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-100'
     },
     {
       title: 'Exact Portal Sizing',
-      desc: 'Guaranteed 20KB–50KB and 200 DPI compliance — zero photo or signature rejections.',
-      tag: '100% Compliant',
+      description:
+        'Guaranteed 20KB–50KB and 200 DPI compliance — zero photo or signature rejections.',
       icon: Cpu,
+      tag: '100% COMPLIANT',
       gradient: 'from-amber-500 to-orange-600',
-      tagColor: 'bg-amber-50 text-amber-800 border-amber-100'
+      tagColor: 'bg-amber-50 text-amber-700 border-amber-100'
     },
     {
       title: 'Dual Lasers + Power Backup',
-      desc: 'Heavy-duty dual printers and inverter backup ensure zero delays during peak rush.',
-      tag: 'Zero Downtime',
+      description:
+        'Heavy-duty dual printers and inverter backup ensure zero delays during peak rush.',
       icon: Printer,
+      tag: 'ZERO DOWNTIME',
       gradient: 'from-purple-500 to-indigo-600',
       tagColor: 'bg-purple-50 text-purple-700 border-purple-100'
     },
     {
       title: '100% Itemized Receipts',
-      desc: 'Transparent billing separating shop assistance fees from official government pass-through fees.',
-      tag: 'Clear Accounting',
+      description:
+        'Transparent billing separating shop assistance fees from official government pass-through fees.',
       icon: Coins,
+      tag: 'CLEAR ACCOUNTING',
       gradient: 'from-teal-500 to-cyan-600',
       tagColor: 'bg-teal-50 text-teal-700 border-teal-100'
     },
     {
       title: 'Prime Location & 12h Open',
-      desc: 'Centrally located near Tehsil Complex. Open 8:30 AM to 8:30 PM for convenient visits.',
-      tag: '8:30 AM – 8:30 PM',
+      description:
+        'Centrally located near Tehsil Complex. Open 8:30 AM to 8:30 PM for convenient visits.',
       icon: Clock,
+      tag: '8:30 AM - 8:30 PM',
       gradient: 'from-rose-500 to-pink-600',
       tagColor: 'bg-rose-50 text-rose-700 border-rose-100'
     }
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-slate-50/70 border-b border-slate-200/70 relative render-content-auto">
+    <section
+      id="why-choose-us"
+      style={{ backgroundColor: '#F8FAFF' }}
+      className="scroll-mt-24 py-16 lg:py-24 border-b border-[#d5e2f5] relative"
+    >
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-brand-blue-500" />
-            <span>The Local Advantage</span>
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#eef4ff] border border-[#d5e2f5] text-indigo-700 text-xs font-bold uppercase tracking-wider mb-3">
+
+            <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+
+            <span>Why Choose Us</span>
+
           </div>
+
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Why Hundreds Trust Us Daily
+
+            Why Choose CyberXero?
+
           </h2>
+
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            High-speed dual laser printers, zero password storage, and 100% portal compliance.
+
+            High-speed dual laser printers, zero password storage,
+            and 100% portal compliance.
+
           </p>
+
         </div>
 
-        {/* Enhanced 6 Vibrant Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reasons.map((r, idx) => {
-            const Icon = r.icon;
+        {/* Six Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {reasons.map((reason, index) => {
+
+            const Icon = reason.icon;
+
             return (
-              <div 
-                key={idx}
-                className="p-6 rounded-3xl bg-white border border-slate-200/70 hover:border-indigo-300 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 overflow-hidden relative"
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-3xl bg-[#eef4ff] border border-[#d5e2f5] p-6 shadow-xs hover:border-indigo-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
               >
-                {/* Top subtle gradient line */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${r.gradient}`} />
 
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${r.gradient} text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-6 h-6" />
-                    </div>
+                {/* Gradient Top Border */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${reason.gradient}`}
+                />
 
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${r.tagColor}`}>
-                      {r.tag}
-                    </span>
+                {/* Icon and Tag */}
+                <div className="flex items-center justify-between gap-3 mb-5">
+
+                  <div
+                    className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${reason.gradient} text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300`}
+                  >
+
+                    <Icon className="w-6 h-6" />
+
                   </div>
 
-                  <h3 className="text-base font-extrabold text-slate-900 mb-2 group-hover:text-brand-blue-600 transition-colors">
-                    {r.title}
-                  </h3>
+                  <span
+                    className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${reason.tagColor}`}
+                  >
 
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    {r.desc}
-                  </p>
+                    {reason.tag}
+
+                  </span>
+
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-slate-400 group-hover:text-slate-600 transition-colors">
-                  <span>Guaranteed at our counter</span>
+                {/* Card Title */}
+                <h3 className="text-base font-extrabold text-slate-900 mb-2">
+
+                  {reason.title}
+
+                </h3>
+
+                {/* Card Description */}
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+
+                  {reason.description}
+
+                </p>
+
+                {/* Card Footer */}
+                <div className="mt-4 pt-4 border-t border-[#d5e2f5]">
+
+                  <span className="text-xs font-semibold text-indigo-600">
+
+                    Guaranteed at our counter
+
+                  </span>
+
                 </div>
+
               </div>
             );
+
           })}
+
         </div>
 
       </div>
+
     </section>
   );
 }

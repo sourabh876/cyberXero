@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 
 import {
@@ -455,9 +454,14 @@ export default function Navbar({ activeView, setActiveView }) {
               className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 rounded-2xl shadow-md shadow-emerald-500/20 hover:shadow-glow-emerald transition-all transform hover:-translate-y-0.5"
             >
 
-              <MessageSquare className="w-3.5 h-3.5 fill-white" />
+             
+<img
+  src="https://cdn.simpleicons.org/whatsapp/FFFFFF"
+  alt="WhatsApp"
+  className="w-4 h-4 object-contain shrink-0"
+/>
 
-              <span>WhatsApp</span>
+<span>WhatsApp</span>
 
             </a>
 
@@ -639,23 +643,6 @@ export default function Navbar({ activeView, setActiveView }) {
 
               </a>
 
-
-
-              {/* WhatsApp */}
-
-              <a
-                href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-xs shadow-md"
-              >
-
-                <MessageSquare className="w-4 h-4 fill-white" />
-
-                WhatsApp: {shopInfo.whatsappDisplay}
-
-              </a>
-
             </div>
 
           </div>
@@ -663,8 +650,31 @@ export default function Navbar({ activeView, setActiveView }) {
         )}
 
       </header>
+      
+
+
+{/* Floating WhatsApp Logo Button */}
+<div className="fixed bottom-6 right-6 z-[9999]">
+  <a
+    href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20CyberXero%2C%20I%20have%20an%20enquiry.`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white shadow-xl shadow-green-500/30 transition-all duration-300 hover:scale-110"
+    aria-label="WhatsApp Chat"
+    title="Chat with us on WhatsApp"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-9 h-9"
+    >
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.33 4.97L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 19.05 4.9 9.85 9.85 0 0 0 12.04 2Zm0 18.16h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 1 1 6.98 3.85Zm4.5-6.14c-.25-.13-1.48-.73-1.71-.81-.23-.09-.4-.13-.57.13-.17.25-.65.81-.8.98-.15.17-.3.19-.55.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.38-1.73-.14-.25-.02-.39.11-.52.12-.12.25-.3.38-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.87-.2-.49-.41-.42-.57-.43h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.23.9 2.42 1.03 2.59.13.25 1.77 2.71 4.29 3.8.6.26 1.14.41 1.57.1.48-.07 1.48-.6 1.69-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.29Z" />
+    </svg>
+  </a>
+</div>
+
 
     </>
-
   );
 }

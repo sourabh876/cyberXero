@@ -12,7 +12,6 @@ import WhyChooseUs from './components/home/WhyChooseUs';
 import FaqSection from './components/home/FaqSection';
 import ContactSection from './components/home/ContactSection';
 import { shopInfo } from './data/servicesData';
-import { MessageSquare } from 'lucide-react';
 
 // Code-split heavy non-critical components to minimize initial render time
 const ServiceDetailModal = lazy(() => import('./components/home/ServiceDetailModal'));
@@ -110,19 +109,24 @@ export default function App() {
         </Suspense>
       )}
 
-      {/* Floating Action Button: Demo WhatsApp Quick Connect */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 select-none">
-        <a
-          href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre%2C%20I%20have%20an%20enquiry.`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs shadow-xl shadow-emerald-500/30 hover:shadow-glow-emerald transition-all transform hover:scale-105"
-          aria-label="Direct WhatsApp Message (Demo)"
-        >
-          <MessageSquare className="w-5 h-5 fill-white text-emerald-500" />
-          <span className="hidden sm:inline font-bold">WhatsApp Direct</span>
-        </a>
-      </div>
+      {/* Floating WhatsApp Logo Button */}
+<div className="fixed bottom-6 right-6 z-50">
+  <a
+    href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20cyberXero%2C%20I%20have%20an%20enquiry.`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+    className="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl hover:bg-[#1ebe5d] hover:scale-110 transition-all duration-300"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+      className="w-10 h-10 fill-current"
+    >
+      <path d="M16 3C8.82 3 3 8.82 3 16c0 2.3.61 4.56 1.77 6.54L3 29l6.65-1.74A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3Zm0 23.7c-2.03 0-4.02-.55-5.76-1.59l-.41-.24-3.95 1.04 1.05-3.85-.27-.42A10.67 10.67 0 1 1 16 26.7Zm5.86-8c-.32-.16-1.9-.94-2.2-1.05-.3-.1-.51-.16-.72.16-.21.32-.83 1.05-1.02 1.27-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.57-1.58-.95-.84-1.59-1.88-1.78-2.2-.19-.32-.02-.49.14-.65.14-.14.32-.38.48-.56.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.72-1.74-.99-2.38-.26-.62-.52-.54-.72-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.68s1.16 3.11 1.32 3.32c.16.21 2.28 3.48 5.52 4.88.77.24 1.47.21 2.02.13.62-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.61-.37Z" />
+    </svg>
+  </a>
+</div>
     </div>
   );
 }
