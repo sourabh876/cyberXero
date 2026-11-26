@@ -58,10 +58,10 @@ export default function HowItWorks() {
             <span>Simple & Stress-Free</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            4 Easy Steps to Done
+            From Walk-In to Finished in 4 Quick Steps
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            No portal confusion, no long waits. Here is how your walk-in gets solved from arrival to print.
+            No Portal Confusion, No Long Waits. Here Is How Your Walk-In Gets Solved From Arrival To Print.
           </p>
         </div>
 
