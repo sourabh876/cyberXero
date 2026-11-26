@@ -1,30 +1,19 @@
 import React, { useState, useMemo, useRef, useEffect, lazy, Suspense } from 'react';
-import { 
-  Search, 
-  X, 
-  Clock, 
-  ArrowRight, 
-  FileCheck, 
-  MessageSquare, 
-  Printer, 
-  ScanLine, 
-  Briefcase, 
-  Landmark, 
-  ShieldCheck, 
-  GraduationCap, 
-  Globe, 
-  Camera, 
-  LayoutGrid,
-  ChevronRight,
-  ChevronLeft,
-  FileText
+import {
+  Search, X, Clock, ArrowRight, FileCheck, Printer, ScanLine, Briefcase,
+  Landmark, ShieldCheck, GraduationCap, Globe, Camera, LayoutGrid,
+  ChevronRight, ChevronLeft, FileText, Sparkles, Zap
 } from 'lucide-react';
 import { serviceCategories, servicesData, shopInfo } from '../../data/servicesData';
+import WhatsAppIcon from '../common/WhatsAppIcon';
 const ServiceDetailModal = lazy(() => import('./ServiceDetailModal'));
+
+const INITIAL_VISIBLE_COUNT = 6;
 
 export default function ServiceCatalogue({ initialCategory = 'all' }) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAll, setShowAll] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const sliderRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -37,6 +26,10 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
   };
+
+  useEffect(() => {
+    setShowAll(false);
+  }, [selectedCategory, searchQuery]);
 
   useEffect(() => {
     checkScroll();
@@ -96,20 +89,29 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
     });
   }, [selectedCategory, searchQuery]);
 
+  const hasMoreServices = filteredServices.length > INITIAL_VISIBLE_COUNT;
+  const visibleServices = showAll
+    ? filteredServices
+    : filteredServices.slice(0, INITIAL_VISIBLE_COUNT);
+
   return (
-    <section id="services" className="scroll-mt-24 py-16 lg:py-24 bg-white border-b border-slate-200/70 relative">
+    <section id="services" className="scroll-mt-24 py-16 lg:py-24 bg-mesh-gradient border-b border-slate-200/70 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header - Crisp and modern */}
+        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-brand-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
-            <span>20+ Verified Services</span>
+          <div className="section-label bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 text-indigo-700 mb-3 mx-auto w-fit">
+            <Sparkles className="w-3.5 h-3.5 text-indigo-500 animate-spin-slow" />
+            <span>WHAT WE CAN HELP YOU WITH</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Explore 20+ Fast, Verified Digital Services
+            One Counter. A Whole Lot of{' '}
+            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+              Things Taken Care Of.
+            </span>
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Search Forms, Check Photo Specs, Or Find Rates. Tap Any Card For The Full Document Checklist.
+            Print, Scan, Submit, Prepare Or Apply. Explore Practical Digital And Document Services For Work, Study And Everyday Life — With Assistance That Keeps The Process Easier To Follow.
           </p>
         </div>
 
@@ -125,7 +127,7 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by keyword (e.g. 'SSC', 'Xerox', 'PAN card', 'Scan', 'Aadhaar')..."
+              placeholder="Search for a service — e.g. print, scan, exam form..."
               className="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-slate-50/80 border border-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-brand-blue-500 text-sm text-slate-900 placeholder-slate-400 shadow-sm transition"
             />
             {searchQuery && (
@@ -188,68 +190,91 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
 
         </div>
 
-        {/* Results Counter */}
-        <div className="flex items-center justify-between text-xs text-slate-500 mb-6 px-1">
-          <span>Showing <strong className="text-slate-800">{filteredServices.length}</strong> available services</span>
-          {searchQuery && (
-            <span className="text-brand-blue-600 font-semibold bg-indigo-50 px-2.5 py-0.5 rounded-full">
-              Filtered by: "{searchQuery}"
+        {/* Results Counter & View All / View Less Text Link */}
+        <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs sm:text-sm text-slate-500 mb-6 px-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span>
+              Showing <strong className="text-slate-800">{visibleServices.length}</strong>
+              {hasMoreServices && (
+                <>
+                  {' '}of <strong className="text-slate-800">{filteredServices.length}</strong>
+                </>
+              )}{' '}
+              available services
             </span>
+            {searchQuery && (
+              <span className="text-brand-blue-600 text-xs font-semibold bg-indigo-50 px-2.5 py-0.5 rounded-full">
+                Filtered by: "{searchQuery}"
+              </span>
+            )}
+          </div>
+
+          {hasMoreServices && (
+            <button
+              type="button"
+              onClick={() => setShowAll((prev) => !prev)}
+              className="text-xs sm:text-sm font-bold text-indigo-600 hover:text-indigo-800 underline underline-offset-4 decoration-2 decoration-indigo-400 hover:decoration-indigo-600 cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+            >
+              {showAll ? 'View Less' : `View All (${filteredServices.length})`}
+            </button>
           )}
         </div>
 
-        {/* Enhanced Services Grid */}
+        {/* Enhanced Interactive & Responsive Services Grid */}
         {filteredServices.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {visibleServices.map((service) => {
               const theme = getCategoryTheme(service.category);
 
               return (
                 <div
                   key={service.id}
+                  role="button"
+                  tabIndex={0}
                   onClick={() => setSelectedService(service)}
-                  className="group bg-white rounded-3xl p-6 border border-slate-200/70 hover:border-indigo-300 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1.5"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedService(service);
+                    }
+                  }}
+                  className="card-3d group relative bg-white rounded-3xl p-4 sm:p-6 border border-slate-200/80 hover:border-indigo-300 active:scale-[0.985] shadow-sm cursor-pointer flex flex-col justify-between overflow-hidden animate-card-enter min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                 >
-                  <div>
+                  {/* Interactive Top Accent & Hover Glow */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-45 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/[0.03] group-hover:to-purple-500/[0.04] transition-colors duration-300 pointer-events-none" />
+
+                  <div className="relative z-10 min-w-0">
                     {/* Top Row: Category Pill & Time Badge */}
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${theme.badge} flex items-center gap-1.5`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${theme.dot}`} />
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                      <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${theme.badge} flex items-center gap-1.5 group-hover:scale-[1.03] transition-transform`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${theme.dot} animate-pulse`} />
                         {service.categoryName}
                       </span>
-                      <span className="text-[11px] font-medium text-slate-500 flex items-center gap-1 bg-slate-50 px-2 py-0.5 rounded-md">
-                        <Clock className="w-3 h-3 text-brand-saffron-500" />
+                      <span className="text-[11px] font-medium text-slate-500 flex items-center gap-1 bg-slate-50 group-hover:bg-amber-50/70 px-2 py-0.5 rounded-lg border border-slate-100 group-hover:border-amber-200/70 transition-colors">
+                        <Clock className="w-3 h-3 text-amber-500 group-hover:rotate-12 transition-transform" />
                         {service.turnaround}
                       </span>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-base font-extrabold text-slate-900 group-hover:text-brand-blue-600 transition-colors mb-2 leading-snug">
+                    <h3 className="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors mb-2 leading-snug">
                       {service.title}
                     </h3>
-
-                    {/* Description */}
                     <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mb-4">
                       {service.description}
                     </p>
 
-                    {/* Clean Required Docs Chips instead of dense text box */}
                     <div className="mb-4">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
-                        Required Docs:
-                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">Required Docs:</span>
                       <div className="flex flex-wrap gap-1.5">
                         {service.requiredDocs.slice(0, 2).map((doc, idx) => (
-                          <span 
-                            key={idx} 
-                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 text-[11px] font-medium text-slate-600 max-w-[200px] truncate"
-                          >
-                            <FileCheck className="w-3 h-3 text-brand-emerald-500 shrink-0" />
+                          <span key={idx} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 group-hover:bg-white border border-slate-200/80 group-hover:border-indigo-200/80 text-[11px] font-medium text-slate-600 max-w-full sm:max-w-[200px] truncate transition-colors">
+                            <FileCheck className="w-3 h-3 text-emerald-500 shrink-0" />
                             <span className="truncate">{doc}</span>
                           </span>
                         ))}
                         {service.requiredDocs.length > 2 && (
-                          <span className="inline-flex items-center px-2 py-1 rounded-lg bg-indigo-50 text-brand-blue-700 text-[10px] font-bold">
+                          <span className="inline-flex items-center px-2 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-[10px] font-bold">
                             +{service.requiredDocs.length - 2} more
                           </span>
                         )}
@@ -257,19 +282,31 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
                     </div>
                   </div>
 
-                  {/* Bottom Row */}
-                  <div className="pt-3.5 border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] uppercase font-medium text-slate-400 block">Indicative Charge</span>
-                      <span className="text-sm font-extrabold text-slate-900 tracking-tight whitespace-nowrap">{service.indicativePrice}</span>
+                  <div className="relative z-10 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                    <div className="min-w-0">
+                      <span className="text-[10px] uppercase font-medium text-slate-400 block">Service charge from</span>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">{service.indicativePrice}</span>
                     </div>
-
-                    <div className="inline-flex items-center gap-1 text-xs font-bold text-brand-blue-600 group-hover:text-brand-saffron-600 transition-colors bg-indigo-50/60 group-hover:bg-amber-50 px-3 py-1.5 rounded-xl border border-indigo-100/60 group-hover:border-amber-200">
-                      <span>Checklist</span>
-                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="flex items-center gap-2 shrink-0">
+                      <a
+                        href={`https://wa.me/${shopInfo.whatsappNumber}?text=${encodeURIComponent(
+                          `Hello cyberXero, I visited your website and need "${service.title}" (${service.categoryName}). Indicative Charge: ${service.indicativePrice}, Turnaround: ${service.turnaround}. Please guide me on the process and required documents.`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="w-8 h-8 rounded-full bg-emerald-50 hover:bg-emerald-500 text-emerald-600 hover:text-white flex items-center justify-center transition-all duration-200 shadow-sm border border-emerald-200 hover:border-emerald-500 hover:scale-110"
+                        title="Quick WhatsApp enquiry"
+                        aria-label={`WhatsApp enquiry for ${service.title}`}
+                      >
+                        <WhatsAppIcon className="w-4 h-4 fill-current" />
+                      </a>
+                      <div className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 group-hover:text-white transition-all bg-indigo-50/80 group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-purple-600 px-3 py-1.5 rounded-xl border border-indigo-100 group-hover:border-transparent shadow-xs">
+                        <span>See what's included</span>
+                        <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
                     </div>
                   </div>
-
                 </div>
               );
             })}
@@ -277,9 +314,9 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
         ) : (
           <div className="text-center py-16 bg-slate-50/80 rounded-3xl border border-dashed border-slate-300">
             <Search className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-slate-800">No matching services found</h3>
+            <h3 className="text-base font-bold text-slate-800">No matching service found</h3>
             <p className="text-xs text-slate-500 max-w-md mx-auto mt-1 mb-4">
-              We may still be able to help you at our counter! Contact us directly on WhatsApp with your query.
+              No matching service found. Try another keyword or message us for help.
             </p>
             <button
               onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}

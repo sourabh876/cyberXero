@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  BadgePercent, 
-  ShieldCheck, 
-  CheckCircle2, 
-  ArrowRight,
-  Sparkles,
-  Tag,
-  Info
+import {
+  ShieldCheck, CheckCircle2, Sparkles, ArrowRight, Tag, Info, Zap
 } from 'lucide-react';
 import { pricingRows, feePolicyDisclaimers } from '../../data/pricingData';
 import PriceCalculator from './PriceCalculator';
+import { shopInfo } from '../../data/servicesData';
+import WhatsAppIcon from '../common/WhatsAppIcon';
 
 export default function PricingTable() {
   const [filterCategory, setFilterCategory] = useState('All');
@@ -21,8 +17,11 @@ export default function PricingTable() {
     : pricingRows.filter(r => r.category === filterCategory);
 
   return (
-    <section id="pricing" className="scroll-mt-24 py-16 lg:py-24 bg-slate-50/70 border-b border-slate-200/70 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="scroll-mt-24 py-16 lg:py-24 bg-gradient-to-b from-indigo-50/30 to-white border-b border-slate-200/70 relative overflow-hidden render-content-auto">
+      {/* Deco */}
+      <div className="orb w-72 h-72 bg-amber-400/8 -top-16 right-10 pointer-events-none animate-pulse-glow" />
+      <div className="orb w-56 h-56 bg-indigo-400/8 bottom-0 left-0 pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
@@ -44,7 +43,7 @@ export default function PricingTable() {
         </div>
 
         {/* Pricing Table Card */}
-        <div className="bg-white/95 rounded-3xl border border-slate-200/70 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden animate-glow-border">
           
           {/* Table Header & Category Filters */}
           <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

@@ -386,10 +386,10 @@ export const trustHighlights = [
 ];
 
 export const shopInfo = {
-  name: 'Digital Seva & Cyber Service Centre',
-  tagline: 'Fast, Trusted Digital & Documentation Help',
-  headline: 'Speedy Digital Solutions, Done in Minutes.',
-  subheadline: 'From Govt Exam Forms And KYC To High-Speed Laser Prints — Zero Errors, Patient Guidance, And Upfront Pricing.',
+  name: 'cyberXero | Digital & Document Counter',
+  tagline: 'Helpful service for the work that matters.',
+  headline: 'Less Paperwork. More Progress.',
+  subheadline: 'Need help with an online application, document upload, scan or print? Practical, step-by-step assistance at one convenient counter.',
   contactPerson: 'Demo Coordinator: Rajesh Sharma (Operator In-Charge)',
   phone: '+91 98000 00000',
   phoneDisplay: '+91 98000 00000',

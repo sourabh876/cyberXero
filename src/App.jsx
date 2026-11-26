@@ -16,7 +16,7 @@ function PageFallback() {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-12">
       <div className="w-10 h-10 border-4 border-indigo-200 border-t-brand-blue-600 rounded-full animate-spin mb-3" />
-      <span className="text-xs font-bold text-slate-400 tracking-wider uppercase">Loading cyberXero...</span>
+      <span className="text-xs font-bold text-slate-400 tracking-wider uppercase">Getting things ready...</span>
     </div>
   );
 }
@@ -90,7 +90,7 @@ export default function App() {
         {/* Floating Action Button: WhatsApp Logo Only */}
         <div className="fixed bottom-6 right-6 z-40 select-none">
           <a
-            href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre%2C%20I%20have%20an%20enquiry.`}
+            href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20cyberXero%2C%20I%20visited%20your%20website%20and%20have%20an%20enquiry.`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:shadow-glow-emerald transition-all transform hover:scale-110 active:scale-95 group"

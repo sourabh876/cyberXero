@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { 
   Printer, 
   FileText, 
@@ -13,24 +13,35 @@ import {
 } from 'lucide-react';
 
 export default function Hero3DIllustration() {
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const stageRef = useRef(null);
+  const rafRef = useRef(null);
 
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget;
-    const box = card.getBoundingClientRect();
-    const x = e.clientX - box.left;
-    const y = e.clientY - box.top;
-    const centerX = box.width / 2;
-    const centerY = box.height / 2;
-    // Mild tilt within +-7 deg
-    const rotateX = ((y - centerY) / centerY) * -6;
-    const rotateY = ((x - centerX) / centerX) * 6;
-    setRotate({ x: rotateX, y: rotateY });
-  };
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
-  const handleMouseLeave = () => {
-    setRotate({ x: 0, y: 0 });
-  };
+  const handleMouseMove = useCallback((e) => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const box = e.currentTarget.getBoundingClientRect();
+    const rotateX = (((e.clientY - box.top) - box.height / 2) / (box.height / 2)) * -6;
+    const rotateY = (((e.clientX - box.left) - box.width / 2) / (box.width / 2)) * 6;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      stage.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    if (stageRef.current) {
+      stageRef.current.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    }
+  }, []);
 
   return (
     <div 
@@ -45,9 +56,10 @@ export default function Hero3DIllustration() {
 
       {/* Main 3D Stage Card */}
       <div 
-        className="relative w-full h-full rounded-3xl bg-gradient-to-br from-white/95 via-indigo-50/40 to-purple-50/30 p-6 border border-white/90 shadow-2xl backdrop-blur-md flex flex-col justify-between transition-transform duration-300 ease-out transform-style-3d"
+        ref={stageRef}
+        className="relative w-full h-full rounded-3xl bg-gradient-to-br from-white/95 via-indigo-50/40 to-purple-50/30 p-6 border border-white/90 shadow-2xl backdrop-blur-md flex flex-col justify-between transition-transform duration-300 ease-out transform-style-3d will-change-transform"
         style={{
-          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+          transform: 'rotateX(0deg) rotateY(0deg)',
           boxShadow: '0 25px 50px -12px rgba(79, 70, 229, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.8)'
         }}
       >

@@ -10,16 +10,17 @@ import {
 } from 'lucide-react';
 import Modal from '../common/Modal';
 import { shopInfo } from '../../data/servicesData';
+import WhatsAppIcon from '../common/WhatsAppIcon';
 
 export default function ServiceDetailModal({ service, isOpen, onClose }) {
   if (!service) return null;
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Digital Seva Centre, I have an enquiry regarding "${service.title}". Indicative rate: ${service.indicativePrice}. Could you please guide me on documents and timings?`
+    `Hello cyberXero, I visited your website and have an enquiry for "${service.title}" (${service.categoryName}). Indicative Rate: ${service.indicativePrice} | Turnaround: ${service.turnaround}. Required Docs: ${service.requiredDocs?.join(', ') || 'Please guide'}. Can we proceed today?`
   );
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Service Details & Document Checklist">
+    <Modal isOpen={isOpen} onClose={onClose} title="Know Before You Visit">
       <div className="space-y-5">
         
         {/* Service Header */}
@@ -30,7 +31,7 @@ export default function ServiceDetailModal({ service, isOpen, onClose }) {
             </span>
             <span className="text-xs font-medium text-slate-500 flex items-center gap-1 bg-slate-50 px-2.5 py-0.5 rounded-full">
               <Clock className="w-3.5 h-3.5 text-brand-saffron-500" />
-              Est. Time: {service.turnaround}
+              Estimated time: {service.turnaround}
             </span>
           </div>
 
@@ -46,7 +47,7 @@ export default function ServiceDetailModal({ service, isOpen, onClose }) {
         {/* Operational Overview */}
         {service.details && (
           <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700 leading-relaxed">
-            <strong className="text-slate-900 block mb-0.5 font-bold">Operational Note:</strong>
+            <strong className="text-slate-900 block mb-0.5 font-bold">What this service covers:</strong>
             {service.details}
           </div>
         )}
@@ -55,7 +56,7 @@ export default function ServiceDetailModal({ service, isOpen, onClose }) {
         <div>
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2.5 flex items-center gap-1.5">
             <FileText className="w-4 h-4 text-brand-blue-600" />
-            <span>Documents to Bring or Send:</span>
+            <span>What to bring:</span>
           </h4>
 
           <ul className="space-y-1.5">
@@ -71,7 +72,7 @@ export default function ServiceDetailModal({ service, isOpen, onClose }) {
         {/* Pricing & Fee Structure */}
         <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-50/70 to-purple-50/50 border border-indigo-100 space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-xs font-bold text-slate-900">Indicative Shop Service Charge:</span>
+            <span className="text-xs font-bold text-slate-900">Our assistance charge:</span>
             <span className="text-base font-black text-brand-blue-700">{service.indicativePrice}</span>
           </div>
           <div className="text-[11px] text-slate-500 font-medium">
@@ -79,14 +80,14 @@ export default function ServiceDetailModal({ service, isOpen, onClose }) {
           </div>
           <div className="pt-2 border-t border-indigo-100/80 flex items-start gap-1.5 text-[11px] text-slate-600">
             <AlertCircle className="w-3.5 h-3.5 text-brand-saffron-600 shrink-0 mt-0.5" />
-            <span><strong>Government / Official Fee:</strong> {service.officialFeeNote}</span>
+            <span><strong>Additional official / portal fee:</strong> {service.officialFeeNote}</span>
           </div>
         </div>
 
-        {/* Security Notice */}
-        <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-100 text-[11px] text-slate-600">
-          <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>Security Notice: For portals requiring mobile OTP, you enter the OTP yourself on our screen.</span>
+        {/* Before you proceed / Disclaimer */}
+        <div className="flex items-start gap-2 p-3 rounded-xl bg-slate-100 text-[11px] text-slate-600">
+          <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+          <span><strong>Before you proceed:</strong> Final requirements, fees and processing timelines are set by the relevant department or service provider. We can assist with the process but cannot guarantee approval or processing by an authority.</span>
         </div>
 
         {/* Action Buttons */}
@@ -97,8 +98,9 @@ export default function ServiceDetailModal({ service, isOpen, onClose }) {
             rel="noopener noreferrer"
             className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 transition transform hover:-translate-y-0.5"
           >
-            <MessageSquare className="w-4 h-4 fill-white" />
-            <span>Enquire on WhatsApp</span>
+            
+            <WhatsAppIcon className="w-5 h-5 fill-white animate-bounce-soft" />
+            <span>Request this service</span>
           </a>
 
           <button

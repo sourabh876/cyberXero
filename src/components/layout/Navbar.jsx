@@ -259,8 +259,8 @@ export default function Navbar() {
               <span>{shopInfo.phoneDisplay}</span>
             </a>
 
-            <a
-              href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre%2C%20I%20need%20assistance%20with%20an%20online%20service.`}
+            {/* <a
+              href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20cyberXero%2C%20I%20visited%20your%20website%20and%20need%20assistance%20with%20an%20online%20or%20printing%20service.`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white flex items-center justify-center shadow-md shadow-emerald-500/20 hover:shadow-glow-emerald transition-all transform hover:scale-105"
@@ -268,13 +268,13 @@ export default function Navbar() {
               title="Chat on WhatsApp"
             >
               <WhatsAppIcon className="w-5 h-5 fill-current" />
-            </a>
+            </a> */}
           </div>
 
           {/* Mobile Menu Toggle & WhatsApp Icon */}
           <div className="flex items-center gap-2 lg:hidden shrink-0">
             <a
-              href={`https://wa.me/${shopInfo.whatsappNumber}`}
+              href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20cyberXero%2C%20I%20visited%20your%20website%20and%20need%20assistance%20with%20an%20online%20or%20printing%20service.`}
               target="_blank"
               rel="noopener noreferrer"
               className={`w-9 h-9 rounded-xl flex items-center justify-center sm:hidden transition ${
@@ -382,7 +382,7 @@ export default function Navbar() {
               </a>
 
               <a
-                href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20Digital%20Seva%20Centre`}
+                href={`https://wa.me/${shopInfo.whatsappNumber}?text=Hello%20cyberXero%2C%20I%20visited%20your%20website%20and%20need%20assistance%20with%20an%20online%20or%20printing%20service.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-xs shadow-md"

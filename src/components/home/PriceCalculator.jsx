@@ -71,7 +71,7 @@ export default function PriceCalculator() {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Digital Seva Centre, I used your website price estimator for: ${bwPages} B&W prints, ${colorPages} Color prints, ${scanPages} Scans, ${formsCount} Online forms, ${laminationCount} Laminations, ${passportPhotoSet} Photo sets. Estimated total: ₹${totalShopEstimate}. Can I get this done today?`
+    `Hello cyberXero, I used your website price estimator for: ${bwPages} B&W prints, ${colorPages} Color prints, ${scanPages} Scans, ${formsCount} Online forms, ${laminationCount} Laminations, ${passportPhotoSet} Photo sets. Estimated total: ₹${totalShopEstimate}. Can I get this done today?`
   );
 
   return (
@@ -85,9 +85,9 @@ export default function PriceCalculator() {
           </div>
           <div>
             <h3 className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight">
-              Estimate Cost in Seconds
+              Know the Cost Before You Get Started.
             </h3>
-            <p className="text-xs text-slate-500">Pick your pages, scans, and forms for an instant total</p>
+            <p className="text-xs text-slate-500">Choose The Services You Need And Get A Quick Estimate Of The Shop's Assistance Charges. No Guesswork At The Counter — Review The Estimate Before Proceeding.</p>
           </div>
         </div>
 
@@ -299,13 +299,13 @@ export default function PriceCalculator() {
       <div className="mt-6 p-6 rounded-2xl bg-gradient-to-r from-brand-blue-700 via-indigo-600 to-brand-purple-600 text-white flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl shadow-indigo-500/20">
         <div>
           <span className="text-xs font-bold text-indigo-100 uppercase tracking-wider block">
-            Estimated Counter Assistance Charge:
+            YOUR ESTIMATED SERVICE TOTAL
           </span>
           <div className="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight mt-0.5">
             ₹{totalShopEstimate}
           </div>
           <p className="text-[11px] text-indigo-200/90 mt-1">
-            *Indicative estimate. Official exam fees or statutory taxes are billed separately at actuals.
+            Estimates cover the listed shop services only. Official, portal or third-party fees may be additional and will be shown separately wherever applicable.
           </p>
         </div>
 
@@ -316,7 +316,7 @@ export default function PriceCalculator() {
           className="px-6 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-brand-blue-700 hover:text-brand-blue-800 font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-md shrink-0 transform hover:scale-105"
         >
           <MessageSquare className="w-4 h-4 text-emerald-500" />
-          <span>Confirm Quote on WhatsApp</span>
+          <span>Review Your Estimate</span>
         </a>
       </div>
 
