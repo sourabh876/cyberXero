@@ -8,10 +8,17 @@ export default defineConfig({
     port: 5173,
     host: true
   },
+  esbuild: {
+    drop: ['console', 'debugger'],
+    legalComments: 'none'
+  },
   build: {
     target: 'esnext',
     minify: 'esbuild',
     cssMinify: true,
+    sourcemap: false,
+    assetsInlineLimit: 4096,
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
         manualChunks(id) {

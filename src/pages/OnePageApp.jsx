@@ -1,19 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/home/Hero';
 import TrustStrip from '../components/home/TrustStrip';
 import PopularServices from '../components/home/PopularServices';
-import ServiceCatalogue from '../components/home/ServiceCatalogue';
-import HowItWorks from '../components/home/HowItWorks';
-import PricingTable from '../components/home/PricingTable';
-import AboutSection from '../components/home/AboutSection';
-import WhyChooseUs from '../components/home/WhyChooseUs';
-import FaqSection from '../components/home/FaqSection';
-import ContactSection from '../components/home/ContactSection';
 import { SECTIONS, scrollToSection } from '../utils/navigation';
+
+// Code-split below-the-fold sections for faster initial FCP/LCP & TTI
+const ServiceCatalogue = lazy(() => import('../components/home/ServiceCatalogue'));
+const HowItWorks = lazy(() => import('../components/home/HowItWorks'));
+const PricingTable = lazy(() => import('../components/home/PricingTable'));
+const AboutSection = lazy(() => import('../components/home/AboutSection'));
+const WhyChooseUs = lazy(() => import('../components/home/WhyChooseUs'));
+const FaqSection = lazy(() => import('../components/home/FaqSection'));
+const ContactSection = lazy(() => import('../components/home/ContactSection'));
+
+// CLS-safe placeholder matching approximate section height
+function SectionSkeleton({ minHeight = 'min-h-[420px]' }) {
+  return <div className={`w-full ${minHeight} bg-transparent`} aria-hidden="true" />;
+}
 
 export default function OnePageApp({ onSelectService }) {
   const location = useLocation();
+
+  const handleExploreServices = useCallback(() => {
+    scrollToSection('services', '/services');
+  }, []);
+
+  // Idle-prefetch below-the-fold chunks after first paint so scrolling has zero wait
+  useEffect(() => {
+    const prefetch = () => {
+      import('../components/home/ServiceCatalogue');
+      import('../components/home/HowItWorks');
+      import('../components/home/PricingTable');
+      import('../components/home/AboutSection');
+      import('../components/home/WhyChooseUs');
+      import('../components/home/FaqSection');
+      import('../components/home/ContactSection');
+    };
+
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(prefetch, { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = setTimeout(prefetch, 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Scroll to targeted section when navigating via URL directly (e.g. /pricing, /services)
   useEffect(() => {
@@ -28,42 +59,57 @@ export default function OnePageApp({ onSelectService }) {
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 80);
+      }, 120);
       return () => clearTimeout(timer);
     } else if (currentPath === '/' && !hash) {
-      // If at root with no target, ensure page starts at the very top
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, [location.pathname, location.hash]);
 
   return (
     <div className="space-y-0">
-      {/* 1. HOME: Hero & Trust Strip */}
-      <Hero onExploreClick={() => scrollToSection('services', '/services')} />
+      {/* 1. HOME: Hero & Trust Strip (Above-the-fold eager) */}
+      <Hero onExploreClick={handleExploreServices} />
       <TrustStrip />
 
-      {/* 2. SERVICES: Popular Quick Cards & Complete Catalogue */}
+      {/* 2. SERVICES: Popular Quick Cards (Eager) & Full Catalogue (Lazy) */}
       <PopularServices
         onSelectService={onSelectService}
-        onViewAllClick={() => scrollToSection('services', '/services')}
+        onViewAllClick={handleExploreServices}
       />
-      <ServiceCatalogue />
 
-      {/* 3. HOW IT WORKS: 4-Step Process & Express Queue */}
-      <HowItWorks />
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[680px]" />}>
+        <ServiceCatalogue />
+      </Suspense>
 
-      {/* 4. PRICING: Live Calculator & Itemized Rate Card */}
-      <PricingTable />
+      {/* 3. HOW IT WORKS */}
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[520px]" />}>
+        <HowItWorks />
+      </Suspense>
 
-      {/* 5. ABOUT US: Centre Mission & 6 Trust Pillars */}
-      <AboutSection onExploreClick={() => scrollToSection('services', '/services')} />
-      <WhyChooseUs />
+      {/* 4. PRICING */}
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[640px]" />}>
+        <PricingTable />
+      </Suspense>
 
-      {/* 6. FAQ: Questions & Real Testimonials */}
-      <FaqSection />
+      {/* 5. ABOUT US & WHY CHOOSE US */}
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[560px]" />}>
+        <AboutSection onExploreClick={handleExploreServices} />
+      </Suspense>
 
-      {/* 7. CONTACT: Information, Map & Quick Form */}
-      <ContactSection />
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[520px]" />}>
+        <WhyChooseUs />
+      </Suspense>
+
+      {/* 6. FAQ */}
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[520px]" />}>
+        <FaqSection />
+      </Suspense>
+
+      {/* 7. CONTACT */}
+      <Suspense fallback={<SectionSkeleton minHeight="min-h-[540px]" />}>
+        <ContactSection />
+      </Suspense>
     </div>
   );
 }
