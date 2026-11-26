@@ -12,8 +12,16 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { servicesData } from '../../data/servicesData';
+import { scrollToSection } from '../../utils/navigation';
 
 export default function PopularServices({ onSelectService, onViewAllClick }) {
+  const handleViewAll = () => {
+    if (onViewAllClick) {
+      onViewAllClick();
+    } else {
+      scrollToSection('services', '/services');
+    }
+  };
   // Filter popular services
   const popularList = servicesData.filter(s => s.popular).slice(0, 6);
 
@@ -90,15 +98,15 @@ export default function PopularServices({ onSelectService, onViewAllClick }) {
               <span>Instant Counter Favorites</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Most Requested Daily Services
+              High-Speed Counter Favorites, Ready in Minutes
             </h2>
             <p className="text-sm text-slate-500 mt-1 max-w-xl">
-              Our fastest, highest-demand counter tasks ready in under 5 minutes.
+              Our Fastest, Highest-Demand Counter Tasks Ready In Under 5 Minutes.
             </p>
           </div>
 
           <button
-            onClick={onViewAllClick}
+            onClick={handleViewAll}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-brand-blue-600 border border-slate-200 text-xs font-bold uppercase tracking-wider shadow-sm transition hover:border-indigo-300 group"
           >
             <span>View All Categories</span>

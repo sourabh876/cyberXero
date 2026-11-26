@@ -106,10 +106,10 @@ export default function ServiceCatalogue({ initialCategory = 'all' }) {
             <span>20+ Verified Services</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Everything We Can Do For You
+            Explore 20+ Fast, Verified Digital Services
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Search forms, check photo specs, or find rates. Tap any card for the full document checklist.
+            Search Forms, Check Photo Specs, Or Find Rates. Tap Any Card For The Full Document Checklist.
           </p>
         </div>
 

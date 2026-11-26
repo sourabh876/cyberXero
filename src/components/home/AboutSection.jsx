@@ -16,8 +16,16 @@ import {
   Clock
 } from 'lucide-react';
 import { shopInfo } from '../../data/servicesData';
+import { scrollToSection } from '../../utils/navigation';
 
 export default function AboutSection({ onExploreClick }) {
+  const handleExplore = () => {
+    if (onExploreClick) {
+      onExploreClick();
+    } else {
+      scrollToSection('services', '/services');
+    }
+  };
   const citizenGroups = [
     { label: 'Students & Applicants', desc: 'College admissions, scholarships & admit cards.', icon: GraduationCap, color: 'text-indigo-600 bg-indigo-50 border-indigo-100' },
     { label: 'Govt Job Aspirants', desc: 'SSC, UPSC, Railway & Police exam applications.', icon: Briefcase, color: 'text-purple-600 bg-purple-50 border-purple-100' },
@@ -41,11 +49,11 @@ export default function AboutSection({ onExploreClick }) {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Your Local <span className="bg-gradient-to-r from-brand-blue-600 to-indigo-600 bg-clip-text text-transparent">Paperwork & Tech Partner</span>
+              Your Trusted Civic Tech <span className="bg-gradient-to-r from-brand-blue-600 to-indigo-600 bg-clip-text text-transparent">& Paperwork Partner</span>
             </h2>
 
             <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
-              We take the headache out of complex online portals, tricky photo resizing, and high-stakes recruitment deadlines.
+              We Take The Headache Out Of Complex Online Portals, Tricky Photo Resizing, And High-Stakes Recruitment Deadlines.
             </p>
 
             {/* 3 Modern Differentiator Cards (instead of heavy text paragraph) */}
@@ -83,7 +91,7 @@ export default function AboutSection({ onExploreClick }) {
 
             <div className="flex items-center gap-4 pt-2">
               <button
-                onClick={onExploreClick}
+                onClick={handleExplore}
                 className="px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-blue-600 to-indigo-600 hover:from-brand-blue-700 hover:to-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-indigo-500/20 transition flex items-center gap-2 transform hover:-translate-y-0.5"
               >
                 <span>Browse All Services</span>

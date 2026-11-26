@@ -73,10 +73,10 @@ export default function WhyChooseUs() {
             <span>The Local Advantage</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Why Hundreds Trust Us Daily
+            Engineered for Speed, Precision & Rock-Solid Trust
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            High-speed dual laser printers, zero password storage, and 100% portal compliance.
+            High-Speed Dual Laser Printers, Zero Password Storage, And 100% Portal Compliance.
           </p>
         </div>
 

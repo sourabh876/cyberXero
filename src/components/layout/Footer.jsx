@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   FileText,
   MapPin,
@@ -6,19 +7,22 @@ import {
   Mail,
   Clock,
   ShieldCheck,
-  MessageSquare,
   ChevronRight,
   UserCheck
 } from 'lucide-react';
 import { shopInfo } from '../../data/servicesData';
+import { SECTIONS, scrollToSection } from '../../utils/navigation';
+import WhatsAppIcon from '../common/WhatsAppIcon';
 
-export default function Footer({ onNavigate }) {
-  const handleScroll = (id) => {
-    if (onNavigate) {
-      onNavigate(id);
+export default function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLinkClick = (section) => {
+    if (location.pathname === '/admin') {
+      navigate(section.path);
     } else {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      scrollToSection(section.id, section.path);
     }
   };
 
@@ -33,7 +37,7 @@ export default function Footer({ onNavigate }) {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <button
-                onClick={() => handleScroll('home')}
+                onClick={() => handleLinkClick({ id: 'home', path: '/' })}
                 className="flex items-center gap-3 shrink-0 mr-auto group text-left"
                 aria-label="cyberXero Home"
               >
@@ -84,48 +88,17 @@ export default function Footer({ onNavigate }) {
               Page Navigation
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li>
-                <button onClick={() => handleScroll('home')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  Home
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleScroll('services')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  Services Directory
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleScroll('how-it-works')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  How It Works
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleScroll('pricing')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  Pricing & Calculator
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleScroll('about')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleScroll('faq')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  FAQ & Feedback
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleScroll('contact')} className="hover:text-amber-400 transition flex items-center gap-1.5 text-left">
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
-                  Contact Desk
-                </button>
-              </li>
+              {SECTIONS.map((section) => (
+                <li key={section.id}>
+                  <button
+                    onClick={() => handleLinkClick(section)}
+                    className="hover:text-amber-400 transition flex items-center gap-1.5 text-left"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-brand-saffron-500" />
+                    {section.name}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -176,7 +149,7 @@ export default function Footer({ onNavigate }) {
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />
+                <WhatsAppIcon className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a
                   href={`https://wa.me/${shopInfo.whatsappNumber}`}
                   target="_blank"
@@ -207,7 +180,7 @@ export default function Footer({ onNavigate }) {
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-          <p>© {new Date().getFullYear()} cyberXero.  All rights reserved.</p>
+          <p>© {new Date().getFullYear()} cyberXero. All rights reserved.</p>
           <div className="flex items-center gap-4 text-[11px]">
             <span className="text-slate-400">Strict OTP Safe</span>
             <span>•</span>

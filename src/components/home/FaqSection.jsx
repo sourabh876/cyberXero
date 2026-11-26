@@ -29,10 +29,10 @@ export default function FaqSection() {
             <span>Clear Answers</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Got Questions? We Have Answers.
+            Instant Answers to Your Essential Questions
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Quick, honest details on document safety, WhatsApp printing, and counter fees.
+            Quick, Honest Details On Document Safety, WhatsApp Printing, And Counter Fees.
           </p>
         </div>
 

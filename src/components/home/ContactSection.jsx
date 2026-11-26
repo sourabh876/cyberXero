@@ -4,7 +4,6 @@ import {
   Phone, 
   Mail, 
   Clock, 
-  MessageSquare, 
   Send, 
   CheckCircle2, 
   Navigation, 
@@ -13,6 +12,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { shopInfo } from '../../data/servicesData';
+import WhatsAppIcon from '../common/WhatsAppIcon';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -55,10 +55,10 @@ export default function ContactSection() {
             <span>Quick Connect</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Visit or Message in Seconds
+            Connect Instantly, Get Prompt Counter Assistance
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Walk into our centre near the Tehsil Complex or send an instant WhatsApp query.
+            Walk Into Our Centre Near The Tehsil Complex Or Send An Instant WhatsApp Query.
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export default function ContactSection() {
 
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
-                    <MessageSquare className="w-4 h-4" />
+                    <WhatsAppIcon className="w-4 h-4 fill-current" />
                   </div>
                   <div>
                     <strong className="text-slate-800 block text-xs mb-0.5">WhatsApp Document Desk:</strong>

@@ -31,10 +31,10 @@ export default function PricingTable() {
             <span>Honest & Upfront</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Clear Rates, Zero Surprises
+            Fixed Transparent Rates, Zero Hidden Surprises
           </h2>
           <p className="text-slate-600 mt-2.5 text-sm sm:text-base leading-relaxed">
-            Every service charge is clearly itemized with separate official government receipts.
+            Every Service Charge Is Clearly Itemized With Separate Official Government Receipts.
           </p>
         </div>
 

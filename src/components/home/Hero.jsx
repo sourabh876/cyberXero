@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
   ArrowRight, 
-  MessageSquare, 
   ShieldCheck, 
   Zap, 
   Printer, 
@@ -10,9 +9,19 @@ import {
   Calculator
 } from 'lucide-react';
 import { shopInfo } from '../../data/servicesData';
+import { scrollToSection } from '../../utils/navigation';
 import Hero3DIllustration from '../3d/Hero3DIllustration';
+import WhatsAppIcon from '../common/WhatsAppIcon';
 
 export default function Hero({ onExploreClick }) {
+  const handleExplore = () => {
+    if (onExploreClick) {
+      onExploreClick();
+    } else {
+      scrollToSection('services', '/services');
+    }
+  };
+
   return (
     <section id="home" className="scroll-mt-24 relative overflow-hidden bg-gradient-to-b from-indigo-50/70 via-purple-50/20 to-white pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-slate-200/60">
       
@@ -35,7 +44,7 @@ export default function Hero({ onExploreClick }) {
 
             {/* Main Headline - Short & Catchy */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
-              Smart Digital Help,{' '}
+              Speedy Digital Solutions,{' '}
               <span className="bg-gradient-to-r from-brand-blue-600 via-brand-purple-600 to-indigo-700 bg-clip-text text-transparent">
                 Done in Minutes.
               </span>
@@ -43,13 +52,13 @@ export default function Hero({ onExploreClick }) {
 
             {/* Punchy Supporting Copy */}
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              From online exam forms and KYC to high-speed laser prints. Walk in with documents, walk out with confirmed submissions.
+              From Online Exam Forms And KYC To High-Speed Laser Prints. Walk In With Documents, Walk Out With Confirmed Submissions.
             </p>
 
             {/* Vibrant CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
               <button
-                onClick={onExploreClick}
+                onClick={handleExplore}
                 className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-brand-blue-600 via-indigo-600 to-brand-purple-600 hover:from-brand-blue-700 hover:to-brand-purple-700 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 hover:shadow-glow-blue transition-all flex items-center justify-center gap-2 group transform hover:-translate-y-0.5"
               >
                 <span>Explore 20+ Services</span>
@@ -62,7 +71,7 @@ export default function Hero({ onExploreClick }) {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-brand-emerald-500 to-teal-600 hover:from-brand-emerald-600 hover:to-teal-700 text-white font-bold text-sm shadow-md shadow-brand-emerald-500/20 hover:shadow-glow-emerald transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
               >
-                <MessageSquare className="w-4 h-4 fill-white" />
+                <WhatsAppIcon className="w-5 h-5 fill-white" />
                 <span>WhatsApp Instant Help</span>
               </a>
 
