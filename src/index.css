@@ -154,6 +154,18 @@
   0%   { transform: translateX(-140%) skewX(-20deg); }
   45%, 100% { transform: translateX(260%) skewX(-20deg); }
 }
+@keyframes cyber-float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes cyber-float-reverse {
+  0%, 100% { transform: translateY(-4px); }
+  50%      { transform: translateY(9px); }
+}
+@keyframes logo-glow {
+  0%, 100% { box-shadow: 0 5px 0 #082f70, 0 10px 20px #168bff55, 0 0 12px #38bdf855; }
+  50%      { box-shadow: 0 5px 0 #082f70, 0 10px 25px #168bff88, 0 0 22px #00d9ff99; }
+}
 
 /* ─── Animation Utilities ───────────────────────────────────── */
 .animate-float          { animation: float-slow     5.5s ease-in-out infinite; }
@@ -175,6 +187,9 @@
 .animate-icon-glide     { animation: icon-glide     2.6s ease-in-out infinite; will-change: transform; }
 .animate-icon-cpu       { animation: icon-cpu       2.4s ease-in-out infinite; will-change: transform; }
 .animate-card-sheen     { animation: card-sheen     5.5s ease-in-out infinite; will-change: transform; }
+.cyber-float            { animation: cyber-float         4s   ease-in-out infinite; will-change: transform; }
+.cyber-float-reverse    { animation: cyber-float-reverse 5s   ease-in-out infinite; will-change: transform; }
+.cyber-logo-glow        { animation: logo-glow           3s   ease-in-out infinite; }
 
 /* Stagger helpers */
 .delay-100  { animation-delay: 100ms; }
